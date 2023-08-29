@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { DndContext } from '@dnd-kit/core';
 import './App.css';
+import './components/Square'
+import Note from './components/note';
+import { useState, useEffect } from "react";
+import DraggableCorner from './components/DraggableCorner';
 
 function App() {
+  const [count, setCount] = useState(0)
+
+  function handleClick(e) {
+    setCount(count + 1)
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={handleClick}>New Note</button>
+      {[...Array(count)].map((_, i) => (
+        <Note key={i} />
+      ))} 
     </div>
   );
 }

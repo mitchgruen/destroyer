@@ -1,0 +1,44 @@
+.square {
+  height: 100px;
+  width: 100px;
+  border: black;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 10px 1fr 10px;
+  grid-template-rows: 10px 1fr 10px;
+  grid-template-areas: 
+  "a x b"
+  "n n n"
+  "c z d";
+}
+
+.top-left {
+  grid-area: a;
+}
+.top-left:hover {
+  cursor: nw-resize
+}
+
+.top-right {
+  grid-area: b;
+}
+.top-right:hover {
+  cursor: ne-resize
+}
+
+.bottom-left {
+  grid-area: c;
+}
+.bottom-left:hover {
+  cursor: sw-resize
+}
+
+.bottom-right {
+  grid-area: d;
+}
+.bottom-right:hover {
+  cursor: se-resize
+}
