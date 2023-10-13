@@ -7,6 +7,8 @@ import DraggableCorner from './components/DraggableCorner';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote } from './app/slices/noteSlice';
 
+import Square from './components/Square'
+
 function App() {
   const [count, setCount] = useState(0)
   const dispatch = useDispatch()

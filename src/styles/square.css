@@ -1,18 +1,13 @@
 .square {
+  position: absolute;
+  z-index: 2;
   height: 100px;
   width: 100px;
   border: black;
   border-style: solid;
   border-color: black;
   border-width: 2px;
-  border-radius: 8px;
-  display: grid;
-  grid-template-columns: 10px 1fr 10px;
-  grid-template-rows: 10px 1fr 10px;
-  grid-template-areas: 
-  "a x b"
-  "n n n"
-  "c z d";
+  /* border-radius: 8px; */
 }
 
 .top-left {

@@ -3,64 +3,101 @@ import DraggableCorner from './DraggableCorner';
 import { useDraggable, DndContext } from '@dnd-kit/core';
 import { useState, useContext } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { setSize, setPosition } from '../app/slices/noteSlice';
+import { setTopLeft, setTopRight, setBottomLeft, setBottomRight } from '../app/slices/noteSlice';
 
 function Square(props) {
 
-  // get rid of all the stuff you're doing with props
-  // see if you can use useSelector to grab hold of state within this component
-  // then, I think we need to head over to DraggableCorner, and within there, set up useDispatch to update the size for our squaress
-
   const note = useSelector(state => state.note[props.noteId])
   const dispatch = useDispatch()
-  // import setPosition and setSize
+
+  // find central position of square
+  // const squarePosition = {x: 0, y: 0}
+  // for (const key in note) {
+  //   squarePosition.x += Number(note[key].x)
+  //   squarePosition.y += Number(note[key].y)
+  // }
+  // squarePosition.x /= 4 
+  // squarePosition.y /= 4 
+  // console.log('Here is Square Position:')
+  // console.dir(squarePosition)
+
 
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
     id: 'Square',
   });
-  
-  let style = transform ? {
-    transform: `translate3d(${transform.x + note.position.x}px, ${transform.y + note.position.y}px, 0)`,
-    height: `${note.size.y}px`,
-    width: `${note.size.x}px`
-  } : {
-    transform: `translate3d(${note.position.x}px, ${note.position.y}px, 0)`,
-    height: `${note.size.y}px`,
-    width: `${note.size.x}px`
-  };
 
-  function handleDragEnd(e) {
-    dispatch(setSize({
+  const style = transform ? {
+    transform: `translate3d(${note.topLeft.x + transform.x}px, ${note.topLeft.y + transform.y}px, 0)`,
+  } : {
+    transform: `translate3d(${note.topLeft.x}px, ${note.topLeft.y}px, 0)`,
+  }
+
+  const squareStyle = {
+    position: 'absolute',
+    zIndex: '2',
+    height: `${note.bottomLeft.y - note.topLeft.y}px`,
+    width: `${note.topRight.x - note.topLeft.x}px`,
+    border: 'black',
+    borderStyle: 'solid',
+    borderColor: 'black',
+    borderWidth: '2px',
+    borderRadius: '8px'
+  }
+
+  function handleTopLeft(e) {
+    dispatch(setTopLeft({
       noteId: props.noteId, 
-      x: note.size.x + e.delta.x, 
-      y: note.size.y + e.delta.y
+      x: e.delta.x, 
+      y: e.delta.y
+    }))
+  }
+  function handleTopRight(e) {
+    dispatch(setTopRight({
+      noteId: props.noteId, 
+      x: e.delta.x, 
+      y: e.delta.y
+    }))
+  }
+  function handleBottomLeft(e) {
+    dispatch(setBottomLeft({
+      noteId: props.noteId, 
+      x: e.delta.x, 
+      y: e.delta.y
+    }))
+  }
+  function handleBottomRight(e) {
+    dispatch(setBottomRight({
+      noteId: props.noteId, 
+      x: e.delta.x, 
+      y: e.delta.y
     }))
   }
 
-  console.log('UPDATED STYLE ' + style.height)
+  // wait a sec... draggable corners are not children of squares any more
+  // remember we went out of our way to make that change
+  // so we can probably use a useEffect to update the size of the square in real time without
+  // creating any looping issues
 
   return (
-    <div className='square' ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <div className='top-left'>
-        <DndContext onDragEnd={handleDragEnd}>
-          <DraggableCorner noteId={props.noteId}/>
-        </DndContext>
+    <div>
+      <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+        <div style={squareStyle}></div>
       </div>
-      <div className='top-right'>
-        <DndContext onDragEnd={handleDragEnd}>
-          <DraggableCorner noteId={props.noteId}/>
-        </DndContext>
-      </div>
-      <div className='bottom-left'>
-        <DndContext onDragEnd={handleDragEnd}>
-          <DraggableCorner noteId={props.noteId}/>
-        </DndContext>
-      </div>
-      <div className='bottom-right'>
-        <DndContext onDragEnd={handleDragEnd}>
-          <DraggableCorner noteId={props.noteId}/>
-        </DndContext>
-      </div>
+      <DndContext onDragEnd={handleTopLeft}>
+        <DraggableCorner noteId={props.noteId} position={'topLeft'}/>
+      </DndContext>
+
+      <DndContext onDragEnd={handleTopRight}>
+        <DraggableCorner noteId={props.noteId} position={'topRight'}/>
+      </DndContext>
+
+      <DndContext onDragEnd={handleBottomLeft}>
+        <DraggableCorner noteId={props.noteId} position={'bottomLeft'}/>
+      </DndContext>
+
+      <DndContext onDragEnd={handleBottomRight}>
+        <DraggableCorner noteId={props.noteId} position={'bottomRight'}/>
+      </DndContext>
     </div>
   );
 }
