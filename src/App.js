@@ -1,13 +1,8 @@
-import { DndContext } from '@dnd-kit/core';
 import './App.css';
-import './components/Square'
 import Note from './components/note';
 import { useState, useEffect } from "react";
-import DraggableCorner from './components/DraggableCorner';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote } from './app/slices/noteSlice';
-
-import Square from './components/Square'
 
 function App() {
   const [count, setCount] = useState(0)
