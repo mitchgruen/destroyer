@@ -1,57 +1,46 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid';
 
 export const noteSlice = createSlice({
-  name: 'note',
+  name: 'notes',
   initialState: {},
   reducers: {
     addNote: (state, action) => {
-      state[action.payload.noteId] = {
-        topLeft: {x: 0, y: 0},
-        topRight: {x: 100, y: 0},
-        bottomLeft: {x: 0, y: 100},
-        bottomRight: {x: 100, y: 100}
-      }
+      state[uuidv4()] =
+        {
+          x: 50,
+          y: 50,
+          z: action.payload.z,
+          height: 250,
+          width: 200,
+          minimized: false,
+          content: ''
+        }
+    },
+    deleteNote: (state, action) => {
+      delete state[action.payload.uuid]
+    },
+    setContent: (state, action) => {
+      state[action.payload.uuid].content = action.payload.content
+    },
+    setZIndex: (state, action) => {
+      state[action.payload.uuid].z = action.payload.z
+    },
+    setSize: (state, action) => {
+      state[action.payload.uuid].height = action.payload.height
+      state[action.payload.uuid].width = action.payload.width
     },
     setPosition: (state, action) => {
-      state[action.payload.noteId].topLeft.x += action.payload.x
-      state[action.payload.noteId].topLeft.y += action.payload.y
-      state[action.payload.noteId].topRight.x += action.payload.x
-      state[action.payload.noteId].topRight.y += action.payload.y
-      state[action.payload.noteId].bottomLeft.x += action.payload.x
-      state[action.payload.noteId].bottomLeft.y += action.payload.y
-      state[action.payload.noteId].bottomRight.x += action.payload.x
-      state[action.payload.noteId].bottomRight.y += action.payload.y
+      state[action.payload.uuid].x = action.payload.x
+      state[action.payload.uuid].y = action.payload.y
     },
-    setTopLeft: (state, action) => {
-      // move dragged corner
-      state[action.payload.noteId].topLeft.x += action.payload.x
-      state[action.payload.noteId].topLeft.y += action.payload.y
-      // adjust dependant corners
-      state[action.payload.noteId].topRight.y += action.payload.y
-      state[action.payload.noteId].bottomLeft.x += action.payload.x
-    },
-    setTopRight: (state, action) => {
-      state[action.payload.noteId].topRight.x += action.payload.x
-      state[action.payload.noteId].topRight.y += action.payload.y
-      state[action.payload.noteId].topLeft.y += action.payload.y
-      state[action.payload.noteId].bottomRight.x += action.payload.x
-    },
-    setBottomLeft: (state, action) => {
-      state[action.payload.noteId].bottomLeft.x += action.payload.x
-      state[action.payload.noteId].bottomLeft.y += action.payload.y
-      state[action.payload.noteId].topLeft.x += action.payload.x
-      state[action.payload.noteId].bottomRight.y += action.payload.y
-    },
-    setBottomRight: (state, action) => {
-      state[action.payload.noteId].bottomRight.x += action.payload.x
-      state[action.payload.noteId].bottomRight.y += action.payload.y
-      state[action.payload.noteId].topRight.x += action.payload.x
-      state[action.payload.noteId].bottomLeft.y += action.payload.y
+    setMinimized: (state, action) => {
+      state[action.payload.uuid].minimized = action.payload.minimized
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { addNote, setPosition, setTopLeft, setTopRight, setBottomLeft, setBottomRight } = noteSlice.actions
+export const { addNote, deleteNote, setContent, setZIndex, setSize, setPosition, setMinimized } = noteSlice.actions
 
 export default noteSlice.reducer
