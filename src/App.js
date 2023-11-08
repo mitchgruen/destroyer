@@ -7,36 +7,32 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [noteState, setNoteState] = useState({})
   const [zIndexCounter, setZIndexCounter] = useState(0)
+  const [minuteTick, setMinuteTick] = useState(0)
 
-  function bringToFront(e) {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMinuteTick(n => n + 1)
+    }, 60 * 1000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const noteState = useSelector(state => state.notes)
+  const dispatch = useDispatch()
+
+  function handleClick() {
     setZIndexCounter(zIndexCounter + 1)
-    e.currentTarget.style.zIndex = zIndexCounter
-    console.log('Bring to front clicked')
-  }
-
-  function handleClick(e) {
-    // dispatch(addNote({noteId: count}))
-    setNoteState(previousState => ({
-      ...previousState,
-      [count]: {
-        x: 50,
-        y: 50,
-        height: 250,
-        width: 200,
-        minimized: false
-      }}))
-    setCount(count + 1)
+    dispatch(addNote({z: zIndexCounter}))
   }
   
   return (
     <div className="App">
       <button onClick={handleClick}>New Note</button>
-      {[...Array(count)].map((_, i) => (
-        <Note key={i} noteId={i} noteState={noteState} setNoteState={setNoteState} bringToFront={bringToFront}/>
-      ))} 
+      {
+        Object.keys(noteState).map((uuid, index) => (
+          <Note key={uuid} uuid={uuid} zIndexCounter={zIndexCounter} setZIndexCounter={setZIndexCounter} minuteTick={minuteTick}/>
+        ))
+      }
     </div>
   );
 }
