@@ -18,7 +18,7 @@ export const noteSlice = createSlice({
           width: 200,
           prevWidth: 200,
           minimized: false,
-          content: 'test' ,
+          content: '' ,
           timestamp: Date.now() + 1000,
         }
     },

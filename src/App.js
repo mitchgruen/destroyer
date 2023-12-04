@@ -1,5 +1,7 @@
-import './App.css';
+import AppStyle from './styles/AppStyle.css';
 import Note from './components/note';
+import Settings from './components/settings';
+import Trash from './components/trash'
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote, deleteNote, setContent, setZIndex, setSize, setPosition, setMinimized } from './app/slices/noteSlice';
@@ -9,6 +11,12 @@ import { v4 as uuidv4 } from 'uuid';
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(0)
   const [minuteTick, setMinuteTick] = useState(0)
+  const [isSettingsOpen, setSettingsOpen] = useState(false);
+  const [isTrashOpen, setTrashOpen] = useState(false);
+
+  // const notes = useSelector(state => state.notes)
+  
+  // next I need to grab the coordinates of a click event whenever one takes place
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,13 +34,30 @@ function App() {
   }
   
   return (
-    <div className="App">
-      <button onClick={handleClick}>New Note</button>
-      {
-        Object.keys(noteState).map((uuid, index) => (
-          <Note key={uuid} uuid={uuid} zIndexCounter={zIndexCounter} setZIndexCounter={setZIndexCounter} minuteTick={minuteTick}/>
-        ))
-      }
+    <div className='app'>
+      <div className={`main ${isSettingsOpen || isTrashOpen ? 'blur-background' : ''}`}>
+        <div className='navbar'>
+          <button onClick={handleClick} className='navbar-icon'>
+            <i className="fa-solid fa-plus"></i>
+          </button>
+          <div>
+            JotSpace
+          </div>
+          <button onClick={() => setSettingsOpen(true)} className='navbar-icon'>
+            <i className="fa-solid fa-gear"></i>
+          </button>
+          <button onClick={() => setTrashOpen(true)} className='navbar-icon'>
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+        {
+          Object.keys(noteState).map((uuid, index) => (
+            <Note key={uuid} uuid={uuid} zIndexCounter={zIndexCounter} setZIndexCounter={setZIndexCounter} minuteTick={minuteTick}/>
+          ))
+        }
+      </div>
+      <Settings onClose={() => setSettingsOpen(false)} isSettingsOpen={isSettingsOpen}/>
+      <Trash onClose={() => setTrashOpen(false)} isTrashOpen={isTrashOpen}/>
     </div>
   );
 }

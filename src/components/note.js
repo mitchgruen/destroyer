@@ -7,23 +7,42 @@ import { addNote, deleteNote, setContent, setZIndex, setSize, setPosition, setMi
 function Note({uuid, zIndexCounter, setZIndexCounter, minuteTick}) {
 
   const note = useSelector(state => state.notes[uuid])
+  const textAreaRef = useRef(null)
   const dispatch = useDispatch()
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState({hours: 24, minutes: 0})
+  const [isNew, setIsNew] = useState(true)
+  const [backgroundClick, setBackgroundClick] = useState(true)
+  const [alertShown, setAlertShown] = useState(false)
+
+  function backgroundClickTrue() {
+    setBackgroundClick(true)
+  }
+
+  function handleHeaderClick() {
+    setBackgroundClick(false)
+    bringToFront()
+  }
+
   useEffect(() => {
     let countdown = get24HourCountdown(note.timestamp)
     setTimeRemaining({hours: countdown.hours, minutes: countdown.minutes})
-    console.log('minuteTick is working')
   }, [minuteTick, note.timestamp])
 
-
+  // this triggers autoFocus on the current note
+  useEffect(() => {
+    if (isNew) {
+      console.log('useEffect fired!!!')
+      textAreaRef.current?.focus();
+      setIsNew(false);
+    }
+  }, []);
 
   const minHeightGlobal = 50
 
   function bringToFront() {
     setZIndexCounter(zIndexCounter + 1)
     dispatch(setZ({uuid: uuid, z: zIndexCounter}))
-    console.log('Bring to front clicked')
   }
 
   function handleClose() {
@@ -38,11 +57,15 @@ function Note({uuid, zIndexCounter, setZIndexCounter, minuteTick}) {
       dispatch(setSize({uuid: uuid, height: minHeightGlobal, prevHeight: note.height, width:note.width, prevWidth: note.width}))
       dispatch(setMinimized({uuid: uuid, minimized: true}))
     }
+    textAreaRef.current?.focus()
   }
 
   function handleKeyDown(e) {
-    if (e.key === 'Enter') {
-      console.log('enter press detected')
+    if (e.key === 'Enter' && !e.shiftKey) {
+      if (!alertShown) {
+        alert('Tip: To save a note, press Enter. To add a new line, use Enter + Shift')
+        setAlertShown(true)
+      }
       e.preventDefault()
       setIsEditing(false)
     }
@@ -64,16 +87,12 @@ function Note({uuid, zIndexCounter, setZIndexCounter, minuteTick}) {
     let timeLeft = creationTime.getTime() + 24 * 60 * 60 * 1000 - now.getTime(); // Time left in milliseconds
   
     if (timeLeft < 0) {
-      // If the countdown has finished, return "00:00"
       return { hours: '00', minutes: '00' };
     }
   
-    // To start from "24:00" we need to include the case where exactly 24 hours are left
     let hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
     let minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
   
-    // If exactly 60 minutes are left in an hour, it should still count as a full hour
-    // and the minutes should reset to "00"
     if (minutesLeft === 60) {
       hoursLeft += 1;
       minutesLeft = 0;
@@ -84,19 +103,6 @@ function Note({uuid, zIndexCounter, setZIndexCounter, minuteTick}) {
   
     return { hours: formattedHours, minutes: formattedMinutes };
   }
-  
-
-  // useEffect(() => {
-  //   const noteTimer = setInterval(() => {
-  //     console.log('in set interval...')
-  //     let countdown = get24HourCountdown(note.timestamp)
-  //     setTimeRemaining({hours: countdown.hours, minutes: countdown.minutes})
-  //   }, 60 * 1000)
-
-  //   return () => clearInterval(noteTimer)
-
-  // })
-
 
   return (
   <div style={{overflow: 'hidden'}}>
@@ -125,6 +131,7 @@ function Note({uuid, zIndexCounter, setZIndexCounter, minuteTick}) {
         bottomLeft: false,
         topLeft: false
       }}
+      onResizeStart={() => setBackgroundClick(false)}
       onResizeStop={(e, dir, ref, delta, position) => {
         if (parseInt(ref.style.height) <= minHeightGlobal && note.minimized) {
           dispatch(setSize({uuid: uuid, height: note.height + delta.height, prevHeight: note.prevHeight, width: note.width + delta.width, prevWidth: note.width}))
@@ -136,9 +143,12 @@ function Note({uuid, zIndexCounter, setZIndexCounter, minuteTick}) {
           dispatch(setSize({uuid: uuid, height: note.height + delta.height, prevHeight: note.height, width: note.width + delta.width, prevWidth: note.width}))
           dispatch(setMinimized({uuid: uuid, minimized: false}))
         }
+        textAreaRef.current?.focus()
+        setBackgroundClick(true)
       }}
       onDragStop={(e, ref) => {
         dispatch(setPosition({uuid: uuid, x: ref.x, y: ref.y}))
+        textAreaRef.current?.focus()
       }}
     >
       <div className='note'>
@@ -148,30 +158,39 @@ function Note({uuid, zIndexCounter, setZIndexCounter, minuteTick}) {
           </button>
         </div>
         <div className="header-left-2">
-          <button onClick={handleMinimize}>
+          <button onClick={handleMinimize} onMouseDown={handleHeaderClick} onMouseUp={backgroundClickTrue}>
             <i className="fa-solid fa-minus"></i>
           </button>
         </div>
-        <div className="header-center drag-handle" onMouseDown={bringToFront}></div>
-        <div className="header-right drag-handle" onMouseDown={bringToFront}>
+        <div className="header-center drag-handle" onMouseDown={handleHeaderClick} onMouseUp={backgroundClickTrue}></div>
+        <div className="header-right drag-handle" onMouseDown={handleHeaderClick} onMouseUp={backgroundClickTrue}>
           <span className='timer'>{timeRemaining.hours ? timeRemaining.hours : '00'}:{timeRemaining.minutes ? timeRemaining.minutes : '00'}</span>
         </div>
         <div className='note-textarea-wrapper' onMouseDown={bringToFront} onClick={() => setIsEditing(true)}>
           {isEditing ? 
             <textarea 
+              ref={textAreaRef}
               className='note-textarea'
               value={note.content}
               onKeyDown={handleKeyDown} 
               onChange={(e) => dispatch(setContent({uuid: uuid, content: e.target.value}))} 
-              onBlur={() => setIsEditing(false)} 
+              // would the best approach not just be to detect background clicks?
+              // so basically say, on blur, if the background was clicked, set editing to false. 
+              // else, textAreaRef.current?.focus()
+              onBlur={() => {
+                if(backgroundClick) {
+                  setIsEditing(false)
+                }
+              }}
               autoFocus
             />
             : 
-            <div
+            <textarea
               className='note-textarea left-align'
+              readOnly
             >
               {note.content}
-            </div>
+            </textarea>
           }
         </div>
       </div>

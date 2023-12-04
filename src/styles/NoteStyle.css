@@ -1,6 +1,4 @@
-:root {
-  --yellow-2: #FFEFB7;
-}
+
 
 .note {
   width: 100%;
@@ -43,6 +41,7 @@
   padding: 0px;
   margin: 0px;
   line-height: 1;
+  white-space: pre-wrap;
   /* box-sizing: border-box; */
   /* margin-top: 12px;
   margin-right: 6px;
@@ -51,10 +50,10 @@
 }
 
 .left-align {
-  display: "flex" !important;
-  flex-direction: "column" !important;
-  align-items: "left" !important;
-  justify-content: "left" !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
 }
 
 .note-textarea-wrapper {
