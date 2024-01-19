@@ -1,0 +1,50 @@
+.settings-container {
+  /* background: rgba(0, 0, 0, 0.5); */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-menu {
+  background-color: white;
+  height: 400px;
+  width: 300px;
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  grid-template-rows: 20px 1fr;
+  grid-template-areas:
+    "close header"
+    "body body";
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid black;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.settings-menu > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+.close {
+  grid-area: close;
+  background-color: var(--gray-2);
+}
+
+.header {
+  grid-area: header;
+  background-color: var(--gray-2);
+}
+
+.settings-body {
+  grid-area: body;
+}

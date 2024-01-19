@@ -1,0 +1,146 @@
+
+
+.note {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 20px 20px 1fr 50px;
+  grid-template-rows: 20px 1fr;
+  grid-template-areas: 
+      "header-left-1 header-left-2 header-center header-right"
+      "note-textarea note-textarea note-textarea note-textarea";
+  border: 1px solid black;
+  margin: 0px;
+  padding: 0px;
+  background-color: lightyellow;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.note > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  min-width: 0px;
+  min-height: 0px;
+}
+
+.note-textarea {
+  grid-area: note-textarea;
+  border: none;
+  outline: none;
+  background: none;
+  resize: none;
+  height: calc(100% - 15px);
+  width: calc(100% - 10px);
+  font-family: monospace;
+  padding: 0px;
+  margin: 0px;
+  line-height: 1;
+  white-space: pre-wrap;
+  /* box-sizing: border-box; */
+  /* margin-top: 12px;
+  margin-right: 6px;
+  margin-bottom: 3px;
+  margin-left: 12px; */
+}
+
+.left-align {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.note-textarea-wrapper {
+  grid-area: note-textarea;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.header-left-1 {
+  grid-area: header-left-1;
+  background-color: var(--yellow-2);
+}
+
+.header-left-2 {
+  grid-area: header-left-2;
+  background-color: var(--yellow-2);
+}
+
+.header-center {
+  grid-area: header-center;
+  background-color: var(--yellow-2);
+}
+
+.header-right {
+  grid-area: header-right;
+  background-color: var(--yellow-2);
+}
+
+
+
+.header {
+  width: 100%;
+  padding: 5px;
+}
+
+.timer {
+  color: black;
+}
+
+.spacer {
+  width: calc(100% - 110px);
+  height: 1px;
+  display: inline-block;
+}
+
+i {
+  /* margin: 5px 8px 0px 5px; */
+}
+
+.drag-handle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+button:active {
+  color: #666666;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 5px;
+}
+
+/* The handle of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 10px;
+  /* border: 2px solid white; */
+}
+
+/* On hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: grey;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+}
