@@ -1,4 +1,4 @@
-import SettingsStyle from '../styles/SettingsStyle.css'
+// import SettingsStyle from '../styles/SettingsStyle.css'
 
 function Settings({onClose, isSettingsOpen}) {
 

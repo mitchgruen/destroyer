@@ -1,4 +1,4 @@
-import TrashStyle from '../styles/TrashStyle.css'
+// import TrashStyle from '../styles/TrashStyle.css'
 
 function Trash({onClose, isTrashOpen}) {
 

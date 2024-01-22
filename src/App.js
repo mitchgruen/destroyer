@@ -1,12 +1,9 @@
-import AppStyle from './styles/AppStyle.css';
 import Note from './components/note';
 import Settings from './components/settings';
 import Trash from './components/trash'
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { addNote, deleteNote, setContent, setZIndex, setSize, setPosition, setMinimized } from './app/slices/noteSlice';
-import { v4 as uuidv4 } from 'uuid';
-
+import { addNote } from './app/slices/noteSlice';
 
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(0)
