@@ -1,9 +1,11 @@
+import './styles/AppStyle.css';
 import Note from './components/note';
 import Settings from './components/settings';
 import Trash from './components/trash'
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote } from './app/slices/noteSlice';
+
 
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(0)
