@@ -92,14 +92,14 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
     }
   }
 
-  function getTimeDifference(date1, date2) {
-    const difference = date2 - date1;
+  // function getTimeDifference(date1, date2) {
+  //   const difference = date2 - date1;
 
-    const hours = Math.floor(difference / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  //   const hours = Math.floor(difference / (1000 * 60 * 60));
+  //   const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 
-    return { hours, minutes };
-  }
+  //   return { hours, minutes };
+  // }
 
   // go through this to make sure you understand how it works
   function get24HourCountdown(createdAt) {
