@@ -1,0 +1,54 @@
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-container {
+  display: grid;
+  grid-template-areas:
+    'register-header'
+    'register-subheader'
+    'register-username'
+    'register-password'
+    'confirm-password'
+    'register-phone-number'
+    'register-create-account';
+}
+
+.register-container > div {
+  margin: 2px 0px;
+}
+
+.register-header {
+  grid-area: register-header;
+}
+
+.register-subheader {
+  grid-area: register-subheader;
+  margin: 5px 0px;
+}
+
+.register-username {
+  grid-area: register-username;
+}
+
+.register-password {
+  grid-area: register-password;
+}
+
+.confirm-password {
+  grid-area: confirm-password;
+}
+
+.register-phone-number {
+  grid-area: register-phone-number;
+}
+
+.register-create-account > button {
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 5px;
+  margin: 5px 0px;
+}
