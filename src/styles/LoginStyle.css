@@ -1,0 +1,54 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  display: grid;
+  grid-template-areas:
+    'login-header'
+    'username'
+    'password'
+    'remember-me'
+    'login-button'
+    'create-account'
+    'forgot-password';
+}
+
+.login-header {
+  grid-area: login-header;
+}
+
+.username {
+  grid-area: username;
+  margin: 5px 0px;
+}
+
+.password {
+  grid-area: password;
+}
+
+.remember-me {
+  grid-area: remember-me;
+}
+
+.login-button {
+  grid-area: login-button;
+}
+
+.login-button > * > button {
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 5px;
+  margin: 5px 0px;
+}
+
+.create-account {
+  grid-area: create-account;
+}
+
+.forgot-password {
+  grid-area: forgot-password;
+}
