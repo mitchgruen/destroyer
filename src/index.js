@@ -8,7 +8,7 @@ import ForgotPassword from './components/forgotpassword';
 import reportWebVitals from './reportWebVitals';
 import store from './app/store';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
