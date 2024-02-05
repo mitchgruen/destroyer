@@ -5,7 +5,6 @@ import Trash from './components/trash';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote } from './app/slices/noteSlice';
-import axios from 'axios';
 
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(0);
