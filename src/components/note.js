@@ -80,10 +80,10 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   }
 
   function handleKeyDown(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && e.shiftKey) {
       if (!alertShown) {
         alert(
-          'Tip: To save a note, press Enter. To add a new line, use Enter + Shift'
+          'Tip: To save a note, press Enter + Shift. To add a new line, use Enter'
         );
         setAlertShown(true);
       }
