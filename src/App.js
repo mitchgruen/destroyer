@@ -32,18 +32,18 @@ function App() {
     dispatch(addNote({ z: zIndexCounter }));
   }
 
-  // API Test
-  useEffect(() => {
-    axios.get('http://54.85.203.34:8000/')
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err))
-  }, [])
+  // EC2 API Test
+  // useEffect(() => {
+  //   axios.get('http://54.85.203.34:8000/')
+  //     .then((res) => console.log(res.data))
+  //     .catch((err) => console.log(err))
+  // }, [])
 
-  useEffect(() => {
-    axios.get('http://54.85.203.34:8000/test')
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err))
-  }, [])
+  // useEffect(() => {
+  //   axios.get('http://54.85.203.34:8000/test')
+  //     .then((res) => console.log(res.data))
+  //     .catch((err) => console.log(err))
+  // }, [])
 
   return (
     <div className="app">
