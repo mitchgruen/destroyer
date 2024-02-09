@@ -1,0 +1,45 @@
+.welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.welcome-container {
+  display: grid;
+  grid-template-areas:
+    'a'
+    'b'
+    'c'
+    'd'
+    'e'
+    'f';
+}
+
+.welcome-a {
+  grid-area: a;
+}
+
+.welcome-b {
+  grid-area: b;
+}
+
+.welcome-c {
+  grid-area: c;
+}
+
+.welcome-d {
+  grid-area: d;
+}
+
+.welcome-e {
+  grid-area: e;
+}
+
+.welcome-f {
+  grid-area: f;
+}
+
+.welcome-g {
+  grid-area: g;
+}
