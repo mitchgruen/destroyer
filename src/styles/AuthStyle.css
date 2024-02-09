@@ -1,0 +1,24 @@
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.auth-container {
+  display: grid;
+  grid-template-rows: 100px 350px;
+  grid-template-columns: 350px;
+  border: 2px solid black;
+}
+
+.auth-container > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-logo {
+  height: 100px;
+  width: auto;
+}

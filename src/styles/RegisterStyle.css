@@ -2,14 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 
 .register-container {
   display: grid;
   grid-template-areas:
     'register-header'
-    'register-subheader'
     'register-a'
     'register-b'
     'register-c'
@@ -19,24 +18,17 @@
     'register-g'
     'register-h'
     'register-i';
-  border: 1px solid black;
-  border-radius: 2px;
-  padding: 20px;
-}
-
-.register-container > * {
-  margin: 2px 0px;
+  grid-template-columns: auto;
+  height: 100%;
+  width: 100%;
 }
 
 .register-header {
+  margin-top: 40px;
   grid-area: register-header;
-  font-size: 2em;
-}
-
-.register-subheader {
-  grid-area: register-subheader;
-  margin: 5px 0px;
   font-size: 1.5em;
+  font-weight: bolder;
+  font-style: italic;
 }
 
 .register-a {
@@ -69,6 +61,9 @@
 
 .register-i {
   grid-area: register-i;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .register button {
@@ -76,6 +71,13 @@
   border-radius: 2px;
   padding: 5px;
   margin: 5px 0px;
+  background-color: black;
+  color: white;
+}
+
+.register button:active {
+  background-color: white;
+  color: black;
 }
 
 .register label {
