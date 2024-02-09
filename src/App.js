@@ -5,6 +5,7 @@ import Trash from './components/trash';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote } from './app/slices/noteSlice';
+import { ReactComponent as DestroyerLogo } from './assets/destroyertext.svg';
 
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(0);
@@ -52,7 +53,9 @@ function App() {
         }`}
       >
         <div className="navbar">
-          <div>Destroyer</div>
+          <div>
+            <DestroyerLogo className='logo'/>
+          </div>
           <button onClick={handleClick} className="navbar-icon">
             <i className="fa-solid fa-plus"></i>
           </button>
@@ -73,7 +76,10 @@ function App() {
           />
         ))}
       </div>
-      <Settings onClose={() => setSettingsOpen(false)} isSettingsOpen={isSettingsOpen}/>
+      <Settings
+        onClose={() => setSettingsOpen(false)}
+        isSettingsOpen={isSettingsOpen}
+      />
       <Trash onClose={() => setTrashOpen(false)} isTrashOpen={isTrashOpen} />
     </div>
   );

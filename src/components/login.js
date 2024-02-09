@@ -2,8 +2,11 @@ import '../styles/LoginStyle.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
@@ -16,9 +19,11 @@ function Login() {
 
   function handleLogin() {
     axios
-      // this will eventually get replaced with the address of your ec2 server
       .post('http://localhost:8000/auth', credentials)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        navigate('/app');
+        console.log(res.data);
+      })
       .catch((err) => console.log(err));
   }
 
