@@ -48,3 +48,16 @@
 .trash-body {
   grid-area: body;
 }
+
+.trash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px !important;
+  padding: 10px !important;
+}
+
+li {
+  font-size: .85em;
+}
