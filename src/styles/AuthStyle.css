@@ -22,3 +22,73 @@
   height: 100px;
   width: auto;
 }
+
+.inner-auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.inner-auth-container {
+  display: grid;
+  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-columns: 1fr;
+  height: 100%;
+  width: 100%;
+}
+
+.inner-auth-container > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
+
+.inner-auth-header {
+  margin-top: 0px;
+  font-size: 1.5em;
+  font-weight: bolder;
+  font-style: italic;
+}
+
+.main-button {
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: 5px;
+  margin-top: 20px;
+  background-color: black;
+  color: white;
+  width: 100%;
+}
+
+.main-button:active {
+  background-color: white;
+  color: black;
+}
+
+.inner-auth label {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.link-button {
+  font-size: .8em;
+  text-decoration: none;
+}
+
+input {
+  background-color: transparent; /* Makes the background transparent */
+  border: none; /* Removes all the borders */
+  border-bottom: 1px solid black; /* Adds a solid line just at the bottom */
+  outline: none; /* Removes the outline */
+  width: 100%;
+  margin: 5px 0px;
+}
+
+form {
+  width: 70%;
+}

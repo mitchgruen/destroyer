@@ -21,6 +21,7 @@ function Settings({onClose, isSettingsOpen}) {
             <li>Default Note Timer</li>
             <li>Trash Hold Time</li>
             <li>Keep Me Logged In</li>
+            <li>Log Out</li>
             <li>Hide/Show Timers</li>
           </ul>
         </div>
