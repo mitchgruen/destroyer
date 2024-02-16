@@ -45,10 +45,19 @@
   margin: 5px 0px;
 }
 
+.signup-button {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .create-account {
   grid-area: create-account;
 }
 
 .forgot-password {
   grid-area: forgot-password;
+}
+
+p {
+  font-size: small;
 }
