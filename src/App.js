@@ -6,9 +6,9 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote } from './app/slices/noteSlice';
 import { ReactComponent as DestroyerLogo } from './assets/logo/destroyertext.svg';
-import { ReactComponent as AddIcon } from './assets/icons/plus-sharp-regular.svg';
-import { ReactComponent as SettingsIcon } from './assets/icons/gear-sharp-solid.svg';
-import { ReactComponent as TrashIcon } from './assets/icons/trash-sharp-solid.svg';
+// import { ReactComponent as AddIcon } from './assets/icons/plus-sharp-regular.svg';
+// import { ReactComponent as SettingsIcon } from './assets/icons/gear-sharp-solid.svg';
+// import { ReactComponent as TrashIcon } from './assets/icons/trash-sharp-solid.svg';
 
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(0);
