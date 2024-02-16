@@ -4,7 +4,6 @@ import Register from './register';
 import ForgotPassword from './forgotpassword';
 import Welcome from './welcome';
 import Thanks from './thanks';
-import AuthWrapper from './authwrapper';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 export default function Router() {
