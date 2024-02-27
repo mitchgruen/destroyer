@@ -6,14 +6,16 @@ import AuthWrapper from './authwrapper';
 export default function Register() {
   const navigate = useNavigate();
 
+  console.log(process.env.REACT_APP_API_URL)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // This grabs the data from the form and converts it to a JavaScript object
     const formData = Object.fromEntries(new FormData(e.currentTarget));
     axios
-      .post('http://localhost:8000/auth', formData)
+      .post(`${process.env.REACT_APP_API_URL}/auth/register`, formData)
       .then((res) => {
-        navigate('/app');
+        navigate('/login');
         console.log(res.status);
       })
       .catch((err) => console.log(err));

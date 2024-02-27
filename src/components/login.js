@@ -6,37 +6,27 @@ import AuthWrapper from './authwrapper';
 function Login() {
   const navigate = useNavigate();
 
-  // const [credentials, setCredentials] = useState({
-  //   username: '',
-  //   password: '',
-  // });
-
-  // function handleChange(e) {
-  //   const { name, value } = e.target;
-  //   setCredentials({ ...credentials, [name]: value });
-  // }
-
-  // function handleLogin() {
-  //   axios
-  //     .post('http://localhost:8000/auth', credentials)
-  //     .then((res) => {
-  //       navigate('/app');
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
-
+  // Click login, authorize user, take them to app
   const handleSubmit = (e) => {
     e.preventDefault();
     // This grabs the data from the form and converts it to a JavaScript object
     const formData = Object.fromEntries(new FormData(e.currentTarget));
     axios
-      .post('http://localhost:8000/auth', formData)
+      .post(`${process.env.REACT_APP_API_URL}/auth/login`, formData)
       .then((res) => {
         navigate('/app');
-        console.log(res.status);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert(err.response.data.message);
+        console.log(err);
+      });
+  };
+
+  // Press enter to login
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
   };
 
   return (
@@ -45,7 +35,7 @@ function Login() {
         <div className="inner-auth-container">
           <div className="inner-auth-header">Login</div>
           <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
               <label>Email</label>
               <input id="email" name="email" type="text" />
               <label>Password</label>
