@@ -24,6 +24,7 @@ export default function ForgotPassword() {
       <div className="inner-auth">
         <div className="inner-auth-container">
           <div className="inner-auth-header">Reset Password</div>
+          <div></div>
           <div>
             <form onSubmit={handleSubmit}>
               <label>Email</label>

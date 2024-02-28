@@ -15,7 +15,7 @@ export const noteSlice = createSlice({
       width: 200,
       prevWidth: 200,
       minimized: false,
-      content: 'Peepee Poopoo',
+      content: 'Test Note',
       timestamp: Date.now() + 1000,
     },
     2: {
@@ -28,7 +28,7 @@ export const noteSlice = createSlice({
       width: 200,
       prevWidth: 200,
       minimized: false,
-      content: 'Peepee Poopoo',
+      content: '2nd Test Note',
       timestamp: Date.now() + 1000,
     },
   },
