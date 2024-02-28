@@ -2,9 +2,13 @@ import '../styles/LoginStyle.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AuthWrapper from './authwrapper';
+import { useState } from 'react';
+import { simpleError } from '../utils/functions';
 
 function Login() {
   const navigate = useNavigate();
+
+  const [loginError, setLoginError] = useState();
 
   // Click login, authorize user, take them to app
   const handleSubmit = (e) => {
@@ -17,7 +21,7 @@ function Login() {
         navigate('/app');
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        setLoginError(simpleError(err).message);
         console.log(err);
       });
   };
@@ -29,11 +33,16 @@ function Login() {
     }
   };
 
+  function printLoginError() {
+    return loginError;
+  }
+
   return (
     <AuthWrapper>
       <div className="inner-auth">
         <div className="inner-auth-container">
           <div className="inner-auth-header">Login</div>
+          <div className="inner-auth-error">{printLoginError()}</div>
           <div>
             <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
               <label>Email</label>
