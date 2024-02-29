@@ -29,6 +29,10 @@ export default function Register() {
         // setPasswordError(simpleError(err).message.password);
         // setConfirmPasswordError(simpleError(err).message.confirm);
         // setNameError(simpleError(err).message.name);
+        setEmailError(simpleError(err).message);
+        setPasswordError(simpleError(err).message);
+        setConfirmPasswordError(simpleError(err).message);
+        setNameError(simpleError(err).message);
         console.log(simpleError(err).message);
       });
   };
