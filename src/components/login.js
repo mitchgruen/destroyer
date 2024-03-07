@@ -26,6 +26,10 @@ function Login() {
       });
   };
 
+  const handleGuest = () => {
+    navigate('/app');
+  }
+
   // Press enter to login
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -57,6 +61,9 @@ function Login() {
               </button>
               <button className="main-button" type="submit">
                 Login
+              </button>
+              <button className="main-button" onClick={handleGuest}>
+                Login as Guest
               </button>
             </form>
           </div>
