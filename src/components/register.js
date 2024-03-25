@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import AuthWrapper from './authwrapper';
 import { simpleError } from '../utils/functions';
+// import { clear } from '@testing-library/user-event/dist/clear';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -11,29 +12,73 @@ export default function Register() {
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [nameError, setNameError] = useState('');
+  const clearErrors = () => {
+    setEmailError('');
+    setPasswordError('');
+    setConfirmPasswordError('');
+    setNameError('');
+  };
 
   console.log(process.env.REACT_APP_API_URL);
 
   const handleSubmit = (e) => {
+    clearErrors();
     e.preventDefault();
     // This grabs the data from the form and converts it to a JavaScript object
     const formData = Object.fromEntries(new FormData(e.currentTarget));
+    // Catch as many registration errors here as you can to avoid unnecessary API calls
+    console.log(formData);
+    const { email, password, confirm, name } = formData;
+
+    // FRONT END FORM VALIDATION
+    // Ensure all fields are filled, return if not
+    if (!email) setEmailError('Required');
+    if (!password) setPasswordError('Required');
+    if (!confirm) setConfirmPasswordError('Required');
+    if (!name) setNameError('Required');
+    if (!email || !password || !confirm || !name) return;
+
+    // Check for valid email, return if not
+    if (
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) &&
+      email !== ''
+    ) {
+      setEmailError(`Invalid Email`);
+      return;
+    }
+
+    // Check for valid password, return if not
+    if (password.length < 6 && password !== '') {
+      setPasswordError(`Your Password Must Be At Least Six Characters Long`);
+      return;
+    }
+
+    // Ensure password and confirm match, return if they don't
+    if (password !== confirm) {
+      setPasswordError('Passwords must match');
+      setConfirmPasswordError('Passwords must match');
+      return;
+    }
+
+    // Check for valid name, return if not
+    if (!/^[A-Za-zÀ-ÖØ-öø-ÿ'-]+$/.test(name) && name !== '') {
+      setNameError(`Invalid Name`);
+      return;
+    }
+
+    // Registration API call
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/register`, formData)
       .then((res) => {
-        navigate('/login');
+        setTimeout(() => {navigate('/thanks')}, 1000)
         console.log(res.status);
       })
       .catch((err) => {
-        // setEmailError(simpleError(err).message.email);
-        // setPasswordError(simpleError(err).message.password);
-        // setConfirmPasswordError(simpleError(err).message.confirm);
-        // setNameError(simpleError(err).message.name);
-        setEmailError(simpleError(err).message);
-        setPasswordError(simpleError(err).message);
-        setConfirmPasswordError(simpleError(err).message);
-        setNameError(simpleError(err).message);
-        console.log(simpleError(err).message);
+        setEmailError(simpleError(err).registration.email);
+        setPasswordError(simpleError(err).registration.password);
+        setConfirmPasswordError(simpleError(err).registration.confirm);
+        setNameError(simpleError(err).registration.name);
+        console.log(simpleError(err));
       });
   };
 
@@ -60,20 +105,16 @@ export default function Register() {
             <form onSubmit={handleSubmit}>
               <label>Email</label>
               <input id="email" name="email" type="text" />
-              <div className='form-error'>{printEmailError()}</div>
+              <div className="form-error">{printEmailError()}</div>
               <label>Password</label>
-              <input id="password" name="password" type="text" />
-              <div className='form-error'>{printPasswordError()}</div>
+              <input id="password" name="password" type="password" />
+              <div className="form-error">{printPasswordError()}</div>
               <label>Confirm Password</label>
-              <input
-                id="confirm"
-                name="confirm"
-                type="text"
-              />
-              <div className='form-error'>{printConfirmPasswordError()}</div>
+              <input id="confirm" name="confirm" type="password" />
+              <div className="form-error">{printConfirmPasswordError()}</div>
               <label>First Name</label>
               <input id="name" name="name" type="text" />
-              <div className='form-error'>{printNameError()}</div>
+              <div className="form-error">{printNameError()}</div>
               <button className="main-button" type="submit">
                 Create Account
               </button>

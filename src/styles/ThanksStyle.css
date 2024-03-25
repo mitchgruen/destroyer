@@ -9,8 +9,10 @@
 
 .thanks-container {
   display: grid;
+  align-items: center;
+  justify-content: center;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 10fr;
+  grid-template-rows: 1fr auto auto 1fr;
   height: 100%;
 }
 

@@ -11,10 +11,12 @@ export default function ForgotPassword() {
     // This grabs the data from the form and converts it to a JavaScript object
     const formData = Object.fromEntries(new FormData(e.currentTarget));
     axios
-      .post('http://localhost:8000/auth', formData)
+      .post('http://localhost:8000/auth/forgot', formData)
       .then((res) => {
-        navigate('/app');
-        console.log(res.status);
+        // navigate('/app');
+        // console.log(res.status);
+        console.log('Inside Handle Submit for Forgot')
+        alert(res.data.message);
       })
       .catch((err) => console.log(err));
   };
