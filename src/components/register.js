@@ -18,6 +18,19 @@ export default function Register() {
     e.preventDefault();
     // This grabs the data from the form and converts it to a JavaScript object
     const formData = Object.fromEntries(new FormData(e.currentTarget));
+    // Catch as many registration errors here as you can to avoid unnecessary API calls
+    console.log(formData);
+    const {email, password, confirm, name} = formData;
+    if (!email) setEmailError('Required');
+    if (!password) setPasswordError('Required');
+    if (!confirm) setConfirmPasswordError('Required');
+    if (!name) setNameError('Required');
+    if (!email || !password || !confirm || !name) return;
+    if (password !== confirm) {
+      setPasswordError('Passwords must match');
+      setConfirmPasswordError('Passwords must match');
+      return;
+    }
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/register`, formData)
       .then((res) => {
@@ -29,11 +42,11 @@ export default function Register() {
         // setPasswordError(simpleError(err).message.password);
         // setConfirmPasswordError(simpleError(err).message.confirm);
         // setNameError(simpleError(err).message.name);
-        setEmailError(simpleError(err).message);
-        setPasswordError(simpleError(err).message);
-        setConfirmPasswordError(simpleError(err).message);
-        setNameError(simpleError(err).message);
-        console.log(simpleError(err).message);
+        setEmailError(simpleError(err).registration.email);
+        setPasswordError(simpleError(err).registration.password);
+        setConfirmPasswordError(simpleError(err).registration.confirm);
+        setNameError(simpleError(err).registration.name);
+        console.log(simpleError(err));
       });
   };
 
@@ -60,20 +73,16 @@ export default function Register() {
             <form onSubmit={handleSubmit}>
               <label>Email</label>
               <input id="email" name="email" type="text" />
-              <div className='form-error'>{printEmailError()}</div>
+              <div className="form-error">{printEmailError()}</div>
               <label>Password</label>
-              <input id="password" name="password" type="text" />
-              <div className='form-error'>{printPasswordError()}</div>
+              <input id="password" name="password" type="password" />
+              <div className="form-error">{printPasswordError()}</div>
               <label>Confirm Password</label>
-              <input
-                id="confirm"
-                name="confirm"
-                type="text"
-              />
-              <div className='form-error'>{printConfirmPasswordError()}</div>
+              <input id="confirm" name="confirm" type="password" />
+              <div className="form-error">{printConfirmPasswordError()}</div>
               <label>First Name</label>
               <input id="name" name="name" type="text" />
-              <div className='form-error'>{printNameError()}</div>
+              <div className="form-error">{printNameError()}</div>
               <button className="main-button" type="submit">
                 Create Account
               </button>
