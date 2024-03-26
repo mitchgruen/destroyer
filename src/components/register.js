@@ -18,6 +18,20 @@ export default function Register() {
     setConfirmPasswordError('');
     setNameError('');
   };
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setIsSubmitting(true);
+    }
+  }
+  const handleKeyUp = (e) => {
+    if (e.key === 'Enter') {
+      setIsSubmitting(false);
+    }
+  }
+
+
+  // useState to ensure that button style changes when submitting with enter
 
   console.log(process.env.REACT_APP_API_URL);
 
@@ -71,7 +85,9 @@ export default function Register() {
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/register`, formData)
       .then((res) => {
-        setTimeout(() => {navigate('/thanks')}, 1000)
+        setTimeout(() => {
+          navigate('/thanks');
+        }, 1000);
         console.log(res.status);
       })
       .catch((err) => {
@@ -103,7 +119,7 @@ export default function Register() {
           <div className="inner-auth-header">Create Your Account</div>
           <div className="inner-auth-error"></div>
           <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
               <label>Email</label>
               <input id="email" name="email" type="text" />
               <div className="form-error">{printEmailError()}</div>
@@ -116,7 +132,7 @@ export default function Register() {
               <label>First Name</label>
               <input id="name" name="name" type="text" />
               <div className="form-error">{printNameError()}</div>
-              <button className="main-button" type="submit">
+              <button className={isSubmitting? "main-button-inverse": "main-button"} type="submit">
                 Create Account
               </button>
             </form>

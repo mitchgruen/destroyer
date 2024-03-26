@@ -76,6 +76,20 @@
   color: black;
 }
 
+/* The above & below are not DRY, refactor */
+
+/* This is the property that permits a style change for submit buttons onClick AND onKeyDown */
+
+.main-button-inverse {
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: 5px;
+  margin-top: 20px;
+  background-color: white;
+  color: black;
+  width: 100%;
+}
+
 .inner-auth label {
   font-size: 0.8em;
   font-weight: bold;
