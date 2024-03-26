@@ -19,7 +19,7 @@ export default function Thanks() {
     <div className="thanks">
       <div className="thanks-container">
         <div></div>
-        <div className="thanks-text">Thanks for registering</div>
+        <div className="thanks-text">Thanks for registering.</div>
         <div className="thanks-text">
           Destroyer is loading{'.'.repeat(count)}
         </div>

@@ -9,6 +9,20 @@ function Login() {
   const navigate = useNavigate();
 
   const [loginError, setLoginError] = useState();
+  // This is copied from registter.js, is there a way to make this DRYer by making it a function/putting it in a separate file?
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const handleKeyUp = (e) => {
+    if (e.key === 'Enter') {
+      setIsSubmitting(false);
+    }
+  };
+  // Press enter to login
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setIsSubmitting(true);
+      handleSubmit(e);
+    }
+  };
 
   // Click login, authorize user, take them to app
   const handleSubmit = (e) => {
@@ -28,13 +42,6 @@ function Login() {
 
   const handleGuest = () => {
     navigate('/app');
-  }
-
-  // Press enter to login
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleSubmit(e);
-    }
   };
 
   function printLoginError() {
@@ -48,7 +55,11 @@ function Login() {
           <div className="inner-auth-header">Login</div>
           <div className="inner-auth-error">{printLoginError()}</div>
           <div>
-            <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
+            <form
+              onSubmit={handleSubmit}
+              onKeyDown={handleKeyDown}
+              onKeyUp={handleKeyUp}
+            >
               <label>Email</label>
               <input id="email" name="email" type="text" />
               <label>Password</label>
@@ -59,7 +70,10 @@ function Login() {
               >
                 Forgot Password?
               </button>
-              <button className="main-button" type="submit">
+              <button
+                className={isSubmitting ? 'main-button-inverse' : 'main-button'}
+                type="submit"
+              >
                 Login
               </button>
               <button className="main-button" onClick={handleGuest}>
