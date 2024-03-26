@@ -4,7 +4,7 @@ import axios from 'axios';
 import AuthWrapper from './authwrapper';
 
 export default function ForgotPassword() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ export default function ForgotPassword() {
       .then((res) => {
         // navigate('/app');
         // console.log(res.status);
-        console.log('Inside Handle Submit for Forgot')
+        console.log('Inside Handle Submit for Forgot');
         alert(res.data.message);
       })
       .catch((err) => console.log(err));

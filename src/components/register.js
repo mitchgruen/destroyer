@@ -39,8 +39,9 @@ export default function Register() {
     if (!email || !password || !confirm || !name) return;
 
     // Check for valid email, return if not
+    // Need to figure out why eslint is highlighting these escape characters \
     if (
-      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) &&
+      !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email) &&
       email !== ''
     ) {
       setEmailError(`Invalid Email`);
