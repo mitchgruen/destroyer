@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import AuthWrapper from './authwrapper';
 import { useState } from 'react';
 import { simpleError } from '../utils/functions';
-import { useEffect } from 'react';
 
 function Login() {
   // Test that .env variables are loaded in production
