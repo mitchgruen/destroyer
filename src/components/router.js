@@ -11,7 +11,7 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/app" element={<App />} />
-        <Route path="*" element={<Navigate replace to="/login" />} />
+        <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/welcome" element={<Welcome />} />
