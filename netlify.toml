@@ -1,0 +1,6 @@
+[dev]
+framework = "create-react-app"
+command = "npm start"
+
+[functions]
+directory = "netlify/functions/"
