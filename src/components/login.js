@@ -59,7 +59,6 @@ function Login() {
     <AuthWrapper>
       <div className="inner-auth">
         <div className="inner-auth-container">
-          <h1>{process.env.REACT_APP_TEST}</h1>
           <div className="inner-auth-header">Login</div>
           <div className="inner-auth-error">{printLoginError()}</div>
           <div>
