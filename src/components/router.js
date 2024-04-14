@@ -12,6 +12,7 @@ export default function Router() {
       <Routes>
         <Route path="/app" element={<App />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
