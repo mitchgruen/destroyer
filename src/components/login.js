@@ -6,10 +6,6 @@ import { useState } from 'react';
 import { simpleError } from '../utils/functions';
 
 function Login() {
-  // Test that .env variables are loaded in production
-  console.log('API URL');
-  console.log(process.env.REACT_APP_API_URL);
-
   const navigate = useNavigate();
 
   const [loginError, setLoginError] = useState();
@@ -51,15 +47,15 @@ function Login() {
   function printLoginError() {
     return loginError;
   }
-
+  console.log('TEST VAR');
   console.log(process.env.REACT_APP_TEST)
+  console.log('API URL');
   console.log(process.env.REACT_APP_API_URL)
 
   return (
     <AuthWrapper>
       <div className="inner-auth">
         <div className="inner-auth-container">
-          <h1>{process.env.REACT_APP_TEST}</h1>
           <div className="inner-auth-header">Login</div>
           <div className="inner-auth-error">{printLoginError()}</div>
           <div>

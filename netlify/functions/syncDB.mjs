@@ -14,8 +14,15 @@ import mongoose from 'mongoose';
 // connect to mongo atlas
 
 const syncDB = async () => {
-  const conn = await mongoose.connect(process.env.MONGO_URI);
-  console.log(`MongoDB Connected: ${conn.connection.host}`.blue.bold);
+  let MONGO_URI;
+  if (process.env.MONGO_URI) {
+    MONGO_URI = process.env.MONGO_URI;
+  } else {
+    return new Response('MONGO_URI env var not working!');
+  }
+
+  const conn = await mongoose.connect(MONGO_URI);
+  return new Response(`MongoDB Connected: ${conn.connection.host}`);
 };
 
 export default syncDB;
