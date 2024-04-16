@@ -6,10 +6,6 @@ import { useState } from 'react';
 import { simpleError } from '../utils/functions';
 
 function Login() {
-  // Test that .env variables are loaded in production
-  console.log('API URL');
-  console.log(process.env.REACT_APP_API_URL);
-
   const navigate = useNavigate();
 
   const [loginError, setLoginError] = useState();
@@ -51,8 +47,9 @@ function Login() {
   function printLoginError() {
     return loginError;
   }
-
+  console.log('TEST VAR');
   console.log(process.env.REACT_APP_TEST)
+  console.log('API URL');
   console.log(process.env.REACT_APP_API_URL)
 
   return (

@@ -18,12 +18,11 @@ const syncDB = async () => {
   if (process.env.MONGO_URI) {
     MONGO_URI = process.env.MONGO_URI;
   } else {
-    console.log('MONGO_URI env var not working!');
     return new Response('MONGO_URI env var not working!');
   }
 
   const conn = await mongoose.connect(MONGO_URI);
-  console.log(`MongoDB Connected: ${conn.connection.host}`.blue.bold);
+  return new Response(`MongoDB Connected: ${conn.connection.host}`);
 };
 
 export default syncDB;
