@@ -30,7 +30,7 @@ export default function ForgotPassword() {
             <form onSubmit={handleSubmit}>
               <label>Email</label>
               <input id="email" name="email" type="text" />
-              <button className="main-button" type="submit">
+              <button className={`main-button hover-hand`} type="submit">
                 Send Reset Email
               </button>
             </form>

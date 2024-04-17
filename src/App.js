@@ -59,16 +59,16 @@ function App() {
           <div>
             <DestroyerLogo className="logo" />
           </div>
-          <button onClick={handleClick} className="navbar-icon">
-            <i className="fa-solid fa-plus"></i>
+          <button onClick={handleClick} className='navbar-icon'>
+            <i className={`fa-solid fa-plus hover-hand`}></i>
             {/* <AddIcon className="navbar-icon" /> */}
           </button>
-          <button onClick={() => setSettingsOpen(true)} className="navbar-icon">
-            <i className="fa-solid fa-gear"></i>
+          <button onClick={() => setSettingsOpen(true)} className='navbar-icon'>
+            <i className={`fa-solid fa-gear hover-hand`}></i>
             {/* <SettingsIcon className="navbar-icon" /> */}
           </button>
-          <button onClick={() => setTrashOpen(true)} className="navbar-icon">
-            <i className="fa-solid fa-trash"></i>
+          <button onClick={() => setTrashOpen(true)} className='navbar-icon'>
+            <i className={`fa-solid fa-trash hover-hand`}></i>
             {/* <TrashIcon className="navbar-icon" /> */}
           </button>
         </div>

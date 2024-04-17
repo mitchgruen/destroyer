@@ -132,7 +132,7 @@ export default function Register() {
               <label>First Name</label>
               <input id="name" name="name" type="text" />
               <div className="form-error">{printNameError()}</div>
-              <button className={isSubmitting? "main-button-inverse": "main-button"} type="submit">
+              <button className={`hover-hand ${isSubmitting? "main-button-inverse": "main-button"}`} type="submit">
                 Create Account
               </button>
             </form>
