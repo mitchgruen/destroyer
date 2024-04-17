@@ -128,7 +128,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   }
 
   return (
-    <div style={{ overflow: 'hidden' }}>
+    // <div style={{ overflow: 'hidden' }}>
       <Rnd
         style={{ zIndex: note.z }}
         minWidth={150}
@@ -144,6 +144,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
         dragHandleClassName="drag-handle"
         size={{ width: note.width, height: note.height }}
         position={{ x: note.x, y: note.y }}
+        bounds={'parent'}
         enableResizing={{
           top: false,
           right: true,
@@ -260,7 +261,6 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
           </div>
         </div>
       </Rnd>
-    </div>
   );
 }
 

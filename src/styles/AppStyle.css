@@ -1,6 +1,6 @@
 .app {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .logo {
@@ -9,8 +9,19 @@
   padding: 5px;
 }
 
-.main {
+.app-grid {
   transition: filter 0.3s ease;
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px 1fr;
+}
+
+.notes-container {
+  margin: 3px 10px 10px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .blur-background {
@@ -29,6 +40,7 @@
   grid-template-columns: 1fr 50px 50px 50px;
   grid-template-rows: auto;
   border-bottom: 2px solid black;
+  position: fixed;
 }
 
 .navbar > div:first-child {
