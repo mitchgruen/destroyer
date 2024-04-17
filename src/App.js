@@ -51,7 +51,7 @@ function App() {
   return (
     <div className="app">
       <div
-        className={`main ${
+        className={`app-grid ${
           isSettingsOpen || isTrashOpen ? 'blur-background' : ''
         }`}
       >
@@ -59,28 +59,31 @@ function App() {
           <div>
             <DestroyerLogo className="logo" />
           </div>
-          <button onClick={handleClick} className='navbar-icon'>
+          <button onClick={handleClick} className="navbar-icon">
             <i className={`fa-solid fa-plus hover-hand`}></i>
             {/* <AddIcon className="navbar-icon" /> */}
           </button>
-          <button onClick={() => setSettingsOpen(true)} className='navbar-icon'>
+          <button onClick={() => setSettingsOpen(true)} className="navbar-icon">
             <i className={`fa-solid fa-gear hover-hand`}></i>
             {/* <SettingsIcon className="navbar-icon" /> */}
           </button>
-          <button onClick={() => setTrashOpen(true)} className='navbar-icon'>
+          <button onClick={() => setTrashOpen(true)} className="navbar-icon">
             <i className={`fa-solid fa-trash hover-hand`}></i>
             {/* <TrashIcon className="navbar-icon" /> */}
           </button>
         </div>
-        {Object.keys(noteState).map((uuid, index) => (
-          <Note
-            key={uuid}
-            uuid={uuid}
-            zIndexCounter={zIndexCounter}
-            setZIndexCounter={setZIndexCounter}
-            minuteTick={minuteTick}
-          />
-        ))}
+        <div></div>
+        <div className='notes-container'>
+          {Object.keys(noteState).map((uuid, index) => (
+            <Note
+              key={uuid}
+              uuid={uuid}
+              zIndexCounter={zIndexCounter}
+              setZIndexCounter={setZIndexCounter}
+              minuteTick={minuteTick}
+            />
+          ))}
+        </div>
       </div>
       <Settings
         onClose={() => setSettingsOpen(false)}
