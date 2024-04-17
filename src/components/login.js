@@ -29,6 +29,20 @@ function Login() {
     e.preventDefault();
     // This grabs the data from the form and converts it to a JavaScript object
     const formData = Object.fromEntries(new FormData(e.currentTarget));
+
+    if (!formData.email && !formData.password) {
+      setLoginError('Email and Password Required');
+      return;
+    }
+    if (!formData.email) {
+      setLoginError('Email Required');
+      return;
+    }
+    if (!formData.password) {
+      setLoginError('Password Required');
+      return;
+    }
+
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/login`, formData)
       .then((res) => {
@@ -47,10 +61,6 @@ function Login() {
   function printLoginError() {
     return loginError;
   }
-  console.log('TEST VAR');
-  console.log(process.env.REACT_APP_TEST)
-  console.log('API URL');
-  console.log(process.env.REACT_APP_API_URL)
 
   return (
     <AuthWrapper>
@@ -71,16 +81,17 @@ function Login() {
               <button
                 onClick={() => navigate('/forgotpassword')}
                 style={{ color: 'grey' }}
+                className='hover-hand'
               >
                 Forgot Password?
               </button>
               <button
-                className={isSubmitting ? 'main-button-inverse' : 'main-button'}
+                className={`hover-hand ${isSubmitting ? 'main-button-inverse' : 'main-button'}`}
                 type="submit"
               >
                 Login
               </button>
-              <button className="main-button" onClick={handleGuest}>
+              <button className={`main-button hover-hand`} onClick={handleGuest}>
                 Login as Guest
               </button>
             </form>
@@ -90,7 +101,7 @@ function Login() {
             <button
               onClick={() => navigate('/register')}
               style={{ color: 'black' }}
-              className="signup-button"
+              className={`signup-button hover-hand`}
             >
               Sign Up
             </button>
