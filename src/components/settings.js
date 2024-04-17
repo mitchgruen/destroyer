@@ -8,7 +8,7 @@ function Settings({ onClose, isSettingsOpen }) {
       <div className="settings-menu">
         <div className="close">
           <button onClick={onClose}>
-            <i className="fa-solid fa-x"></i>
+            <i className={`fa-solid fa-x hover-hand`}></i>
           </button>
         </div>
         <div className="header" />
