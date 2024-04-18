@@ -9,7 +9,7 @@ import {
   setPosition,
   setMinimized,
   setZ,
-} from '../app/slices/noteSlice';
+} from '../redux/slices/noteSlice';
 
 function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   const note = useSelector((state) => state.notes[uuid]);
@@ -33,6 +33,14 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   useEffect(() => {
     let countdown = get24HourCountdown(note.timestamp);
     setTimeRemaining({ hours: countdown.hours, minutes: countdown.minutes });
+    console.log('Time Remaining: ');
+    console.dir(timeRemaining);
+    // When a note reaches 00:00, it is deleted (with a 3.5 second delay)
+    if (timeRemaining.hours === '00' && timeRemaining.minutes <= '01') {
+      setTimeout(() => {
+        handleClose();
+      }, 3500);
+    }
   }, [minuteTick, note.timestamp]);
 
   // this triggers autoFocus on the current note
@@ -101,7 +109,6 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   //   return { hours, minutes };
   // }
 
-  // go through this to make sure you understand how it works
   function get24HourCountdown(createdAt) {
     const creationTime = new Date(createdAt);
     const now = new Date();
@@ -129,138 +136,138 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
 
   return (
     // <div style={{ overflow: 'hidden' }}>
-      <Rnd
-        style={{ zIndex: note.z }}
-        minWidth={150}
-        minHeight={minHeightGlobal}
-        lockAspectRatio={false}
-        enableUserSelectHack={true}
-        default={{
-          x: 50,
-          y: 50,
-          width: 200,
-          height: 250,
-        }}
-        dragHandleClassName="drag-handle"
-        size={{ width: note.width, height: note.height }}
-        position={{ x: note.x, y: note.y }}
-        bounds={'parent'}
-        enableResizing={{
-          top: false,
-          right: true,
-          bottom: true,
-          left: false,
-          topRight: false,
-          bottomRight: true,
-          bottomLeft: false,
-          topLeft: false,
-        }}
-        onResizeStart={() => setBackgroundClick(false)}
-        onResizeStop={(e, dir, ref, delta, position) => {
-          if (parseInt(ref.style.height) <= minHeightGlobal && note.minimized) {
-            dispatch(
-              setSize({
-                uuid: uuid,
-                height: note.height + delta.height,
-                prevHeight: note.prevHeight,
-                width: note.width + delta.width,
-                prevWidth: note.width,
-              })
-            );
-            dispatch(setMinimized({ uuid: uuid, minimized: true }));
-          } else if (parseInt(ref.style.height) <= minHeightGlobal) {
-            dispatch(
-              setSize({
-                uuid: uuid,
-                height: note.height + delta.height,
-                prevHeight: note.height,
-                width: note.width + delta.width,
-                prevWidth: note.width,
-              })
-            );
-            dispatch(setMinimized({ uuid: uuid, minimized: true }));
-          } else {
-            dispatch(
-              setSize({
-                uuid: uuid,
-                height: note.height + delta.height,
-                prevHeight: note.height,
-                width: note.width + delta.width,
-                prevWidth: note.width,
-              })
-            );
-            dispatch(setMinimized({ uuid: uuid, minimized: false }));
-          }
-          textAreaRef.current?.focus();
-          setBackgroundClick(true);
-        }}
-        onDragStop={(e, ref) => {
-          dispatch(setPosition({ uuid: uuid, x: ref.x, y: ref.y }));
-          textAreaRef.current?.focus();
-        }}
-      >
-        <div className="note">
-          <div className="header-left-1">
-            <button onClick={handleClose}>
-              <i className={`fa-solid fa-x hover-hand`}></i>
-            </button>
-          </div>
-          <div className="header-left-2">
-            <button
-              onClick={handleMinimize}
-              onMouseDown={handleHeaderClick}
-              onMouseUp={backgroundClickTrue}
-            >
-              <i className={`fa-solid fa-minus hover-hand`}></i>
-            </button>
-          </div>
-          <div
-            className="header-center drag-handle"
-            onMouseDown={handleHeaderClick}
-            onMouseUp={backgroundClickTrue}
-          ></div>
-          <div
-            className="header-right drag-handle"
-            onMouseDown={handleHeaderClick}
-            onMouseUp={backgroundClickTrue}
-          >
-            <span className="timer">
-              {timeRemaining.hours ? timeRemaining.hours : '00'}:
-              {timeRemaining.minutes ? timeRemaining.minutes : '00'}
-            </span>
-          </div>
-          <div
-            className="note-textarea-wrapper"
-            onMouseDown={bringToFront}
-            onClick={() => setIsEditing(true)}
-          >
-            {isEditing ? (
-              <textarea
-                ref={textAreaRef}
-                className="note-textarea"
-                value={note.content}
-                onKeyDown={handleKeyDown}
-                onChange={(e) =>
-                  dispatch(setContent({ uuid: uuid, content: e.target.value }))
-                }
-                // would the best approach not just be to detect background clicks?
-                // so basically say, on blur, if the background was clicked, set editing to false.
-                // else, textAreaRef.current?.focus()
-                onBlur={() => {
-                  if (backgroundClick) {
-                    setIsEditing(false);
-                  }
-                }}
-                autoFocus
-              />
-            ) : (
-              <textarea className="note-textarea left-align" readOnly>
-                {note.content}
-              </textarea>
-            )}
-          </div>
+    <Rnd
+      style={{ zIndex: note.z }}
+      minWidth={150}
+      minHeight={minHeightGlobal}
+      lockAspectRatio={false}
+      enableUserSelectHack={true}
+      default={{
+        x: 50,
+        y: 50,
+        width: 200,
+        height: 250,
+      }}
+      dragHandleClassName="drag-handle"
+      size={{ width: note.width, height: note.height }}
+      position={{ x: note.x, y: note.y }}
+      bounds={'parent'}
+      enableResizing={{
+        top: false,
+        right: true,
+        bottom: true,
+        left: false,
+        topRight: false,
+        bottomRight: true,
+        bottomLeft: false,
+        topLeft: false,
+      }}
+      onResizeStart={() => setBackgroundClick(false)}
+      onResizeStop={(e, dir, ref, delta, position) => {
+        if (parseInt(ref.style.height) <= minHeightGlobal && note.minimized) {
+          dispatch(
+            setSize({
+              uuid: uuid,
+              height: note.height + delta.height,
+              prevHeight: note.prevHeight,
+              width: note.width + delta.width,
+              prevWidth: note.width,
+            })
+          );
+          dispatch(setMinimized({ uuid: uuid, minimized: true }));
+        } else if (parseInt(ref.style.height) <= minHeightGlobal) {
+          dispatch(
+            setSize({
+              uuid: uuid,
+              height: note.height + delta.height,
+              prevHeight: note.height,
+              width: note.width + delta.width,
+              prevWidth: note.width,
+            })
+          );
+          dispatch(setMinimized({ uuid: uuid, minimized: true }));
+        } else {
+          dispatch(
+            setSize({
+              uuid: uuid,
+              height: note.height + delta.height,
+              prevHeight: note.height,
+              width: note.width + delta.width,
+              prevWidth: note.width,
+            })
+          );
+          dispatch(setMinimized({ uuid: uuid, minimized: false }));
+        }
+        textAreaRef.current?.focus();
+        setBackgroundClick(true);
+      }}
+      onDragStop={(e, ref) => {
+        dispatch(setPosition({ uuid: uuid, x: ref.x, y: ref.y }));
+        textAreaRef.current?.focus();
+      }}
+    >
+      <div className="note">
+        <div className="header-left-1">
+          <button onClick={handleClose}>
+            <i className={`fa-solid fa-x hover-hand`}></i>
+          </button>
         </div>
-      </Rnd>
+        <div className="header-left-2">
+          <button
+            onClick={handleMinimize}
+            onMouseDown={handleHeaderClick}
+            onMouseUp={backgroundClickTrue}
+          >
+            <i className={`fa-solid fa-minus hover-hand`}></i>
+          </button>
+        </div>
+        <div
+          className="header-center drag-handle"
+          onMouseDown={handleHeaderClick}
+          onMouseUp={backgroundClickTrue}
+        ></div>
+        <div
+          className="header-right drag-handle"
+          onMouseDown={handleHeaderClick}
+          onMouseUp={backgroundClickTrue}
+        >
+          <span className="timer">
+            {timeRemaining.hours ? timeRemaining.hours : '00'}:
+            {timeRemaining.minutes ? timeRemaining.minutes : '00'}
+          </span>
+        </div>
+        <div
+          className="note-textarea-wrapper"
+          onMouseDown={bringToFront}
+          onClick={() => setIsEditing(true)}
+        >
+          {isEditing ? (
+            <textarea
+              ref={textAreaRef}
+              className="note-textarea"
+              value={note.content}
+              onKeyDown={handleKeyDown}
+              onChange={(e) =>
+                dispatch(setContent({ uuid: uuid, content: e.target.value }))
+              }
+              // would the best approach not just be to detect background clicks?
+              // so basically say, on blur, if the background was clicked, set editing to false.
+              // else, textAreaRef.current?.focus()
+              onBlur={() => {
+                if (backgroundClick) {
+                  setIsEditing(false);
+                }
+              }}
+              autoFocus
+            />
+          ) : (
+            <textarea className="note-textarea left-align" readOnly>
+              {note.content}
+            </textarea>
+          )}
+        </div>
+      </div>
+    </Rnd>
   );
 }
 
