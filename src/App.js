@@ -4,7 +4,7 @@ import Settings from './components/settings';
 import Trash from './components/trash';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addNote } from './app/slices/noteSlice';
+import { addNote } from './redux/slices/noteSlice';
 import { ReactComponent as DestroyerLogo } from './assets/logo/destroyertext.svg';
 // import { ReactComponent as AddIcon } from './assets/icons/plus-sharp-regular.svg';
 // import { ReactComponent as SettingsIcon } from './assets/icons/gear-sharp-solid.svg';
@@ -35,19 +35,6 @@ function App() {
     dispatch(addNote({ z: zIndexCounter }));
   }
 
-  // EC2 API Test
-  // useEffect(() => {
-  //   axios.get('http://54.85.203.34:8000/')
-  //     .then((res) => console.log(res.data))
-  //     .catch((err) => console.log(err))
-  // }, [])
-
-  // useEffect(() => {
-  //   axios.get('http://54.85.203.34:8000/test')
-  //     .then((res) => console.log(res.data))
-  //     .catch((err) => console.log(err))
-  // }, [])
-
   return (
     <div className="app">
       <div
@@ -73,7 +60,7 @@ function App() {
           </button>
         </div>
         <div></div>
-        <div className='notes-container'>
+        <div className="notes-container">
           {Object.keys(noteState).map((uuid, index) => (
             <Note
               key={uuid}
