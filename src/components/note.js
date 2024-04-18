@@ -16,7 +16,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   const textAreaRef = useRef(null);
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(true);
-  const [timeRemaining, setTimeRemaining] = useState({ hours: 24, minutes: 0 });
+  // const [timeRemaining, setTimeRemaining] = useState({ hours: 24, minutes: 0 });
   const [isNew, setIsNew] = useState(true);
   const [backgroundClick, setBackgroundClick] = useState(true);
   const [alertShown, setAlertShown] = useState(false);
@@ -30,24 +30,35 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
     bringToFront();
   }
 
-  useEffect(() => {
-    let countdown = get24HourCountdown(note.timestamp);
-    setTimeRemaining({ hours: countdown.hours, minutes: countdown.minutes });
-    console.log('Time Remaining: ');
-    console.dir(timeRemaining);
-    // When a note reaches 00:00, it is deleted (with a 3.5 second delay)
-    if (timeRemaining.hours === '00' && timeRemaining.minutes <= '01') {
-      setTimeout(() => {
-        handleClose();
-      }, 3500);
-    }
-  }, [minuteTick, note.timestamp]);
+  // replace useState definition of timeRemaining with variable definition
+  // testing removing the useEffect
+  let countdown = get24HourCountdown(note.timestamp);
+  let timeRemaining = { hours: countdown.hours, minutes: countdown.minutes };
+  // When a note reaches 00:00, it is deleted (with a 3.5 second delay)
+  if (timeRemaining.hours === '00' && timeRemaining.minutes === '00') {
+    setTimeout(() => {
+      handleClose();
+    }, 3500);
+  }
+
+  console.log('fresh render');
+  // useEffect(() => {
+  //   let countdown = get24HourCountdown(note.timestamp);
+  //   setTimeRemaining({ hours: countdown.hours, minutes: countdown.minutes });
+  //   // When a note reaches 00:00, it is deleted (with a 3.5 second delay)
+  //   if (timeRemaining.hours === '00' && timeRemaining.minutes <= '01') {
+  //     setTimeout(() => {
+  //       handleClose();
+  //     }, 3500);
+  //   }
+  // }, [minuteTick, note.timestamp]);
 
   // this triggers autoFocus on the current note
-  useEffect(() => {
+  if (isNew) {
     textAreaRef.current?.focus();
+    bringToFront();
     setIsNew(false);
-  }, [isNew]);
+  }
 
   const minHeightGlobal = 50;
 
