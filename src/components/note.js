@@ -30,6 +30,9 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
     bringToFront();
   }
 
+  console.log('Rendered: ' + uuid)
+
+  // I might refactor lines 36-43, might be better managed with time remaining in state and a use effect?
   // replace useState definition of timeRemaining with variable definition
   // testing removing the useEffect
   let countdown = get24HourCountdown(note.timestamp);
@@ -40,8 +43,6 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
       handleClose();
     }, 3500);
   }
-
-  console.log('fresh render');
   // useEffect(() => {
   //   let countdown = get24HourCountdown(note.timestamp);
   //   setTimeRemaining({ hours: countdown.hours, minutes: countdown.minutes });
@@ -54,11 +55,10 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   // }, [minuteTick, note.timestamp]);
 
   // this triggers autoFocus on the current note
-  if (isNew) {
+  useEffect(() => {
     textAreaRef.current?.focus();
-    bringToFront();
     setIsNew(false);
-  }
+  }, [isNew]);
 
   const minHeightGlobal = 50;
 
