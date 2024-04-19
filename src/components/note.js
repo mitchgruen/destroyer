@@ -16,7 +16,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   const textAreaRef = useRef(null);
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(true);
-  const [timeRemaining, setTimeRemaining] = useState({ hours: 24, minutes: 0 });
+  // const [timeRemaining, setTimeRemaining] = useState({ hours: 24, minutes: 0 });
   const [isNew, setIsNew] = useState(true);
   const [backgroundClick, setBackgroundClick] = useState(true);
   const [alertShown, setAlertShown] = useState(false);
@@ -30,18 +30,29 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
     bringToFront();
   }
 
-  useEffect(() => {
-    let countdown = get24HourCountdown(note.timestamp);
-    setTimeRemaining({ hours: countdown.hours, minutes: countdown.minutes });
-    console.log('Time Remaining: ');
-    console.dir(timeRemaining);
-    // When a note reaches 00:00, it is deleted (with a 3.5 second delay)
-    if (timeRemaining.hours === '00' && timeRemaining.minutes <= '01') {
-      setTimeout(() => {
-        handleClose();
-      }, 3500);
-    }
-  }, [minuteTick, note.timestamp]);
+  console.log('Rendered: ' + uuid)
+
+  // I might refactor lines 36-43, might be better managed with time remaining in state and a use effect?
+  // replace useState definition of timeRemaining with variable definition
+  // testing removing the useEffect
+  let countdown = get24HourCountdown(note.timestamp);
+  // let timeRemaining = { hours: countdown.hours, minutes: countdown.minutes };
+  // When a note reaches 00:00, it is deleted (with a 3.5 second delay)
+  if (countdown.hours === '00' && countdown.minutes === '00') {
+    setTimeout(() => {
+      handleClose();
+    }, 3500);
+  }
+  // useEffect(() => {
+  //   let countdown = get24HourCountdown(note.timestamp);
+  //   setcountdown({ hours: countdown.hours, minutes: countdown.minutes });
+  //   // When a note reaches 00:00, it is deleted (with a 3.5 second delay)
+  //   if (countdown.hours === '00' && countdown.minutes <= '01') {
+  //     setTimeout(() => {
+  //       handleClose();
+  //     }, 3500);
+  //   }
+  // }, [minuteTick, note.timestamp]);
 
   // this triggers autoFocus on the current note
   useEffect(() => {
@@ -112,7 +123,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   function get24HourCountdown(createdAt) {
     const creationTime = new Date(createdAt);
     const now = new Date();
-    let timeLeft = creationTime.getTime() + 24 * 60 * 60 * 1000 - now.getTime(); // Time left in milliseconds
+    let timeLeft = creationTime.getTime() + 24 * 60 * 60 * 1000 - now.getTime() - 1000; // Time left in milliseconds
 
     if (timeLeft < 0) {
       return { hours: '00', minutes: '00' };
@@ -232,8 +243,8 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
           onMouseUp={backgroundClickTrue}
         >
           <span className="timer">
-            {timeRemaining.hours ? timeRemaining.hours : '00'}:
-            {timeRemaining.minutes ? timeRemaining.minutes : '00'}
+            {countdown.hours ? countdown.hours : '00'}:
+            {countdown.minutes ? countdown.minutes : '00'}
           </span>
         </div>
         <div

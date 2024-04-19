@@ -16,7 +16,7 @@ export const noteSlice = createSlice({
       prevWidth: 200,
       minimized: false,
       content: 'Test Note',
-      timestamp: Date.now() - 86300000,
+      timestamp: Date.now() - 86250000,
     },
     2: {
       uuid: 2,

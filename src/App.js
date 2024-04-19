@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setMinuteTick((n) => n + 1);
-    }, 60 * 1000);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
