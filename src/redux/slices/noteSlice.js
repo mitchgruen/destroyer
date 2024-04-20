@@ -44,6 +44,19 @@ export const noteSlice = createSlice({
     //   content: 'Need to find out from doctor stepfroth if I got my test results back',
     //   timestamp: Date.now() + 1000,
     // },
+    abc: {
+      uuid: 'abc',
+      x: 500,
+      y: 100,
+      z: 1,
+      height:400,
+      prevHeight: 200,
+      width: 400,
+      prevWidth: 200,
+      minimized: false,
+      content: `Welcome to Destroyer!\n\nDestroyer is an "ephemeral notepad", meaning that the notes that you add here are not meant to be kept for very long. Destroyer notes have a 24 hour lifespan, after which they are destroyed, forever.\n\nTo create a new note, click the + icon on the toolbar at the top left of your screen. Notes can be dragged and resized.\n\nNote destruction isn't the only way Destroyer helps you stay clutter free. When you click the magic wand, Destroyer uses AI to sort and consolidate your notes. This feature won't do much if you only have a few notes, but try it after a chaotic brainstorming session and you'll be amazed!`,
+      timestamp: Date.now(),
+    },
   },
   reducers: {
     addNote: (state, action) => {

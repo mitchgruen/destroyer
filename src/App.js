@@ -42,7 +42,7 @@ function App() {
     const reduxState = store.getState();
     console.log('Here is the Redux State: ' + reduxState);
     axios
-      .post('https://api.destroyerapp.com/sort', reduxState)
+      .post('https://www.api.destroyerapp.com/sort', reduxState)
       .then((res) => {
         console.log('Here is res: ');
         console.log(typeof JSON.parse(res.data.notes));
