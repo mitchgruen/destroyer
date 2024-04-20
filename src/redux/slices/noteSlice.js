@@ -5,8 +5,8 @@ export const noteSlice = createSlice({
   name: 'notes',
   // this is where you load your initial state from mongo
   initialState: {
-    // 1: {
-    //   uuid: 1,
+    // abc: {
+    //   uuid: 'abc',
     //   x: 500,
     //   y: 500,
     //   z: 1,
@@ -15,11 +15,11 @@ export const noteSlice = createSlice({
     //   width: 200,
     //   prevWidth: 200,
     //   minimized: false,
-    //   content: 'Test Note',
+    //   content: 'Need to call dr. stepforth on monday',
     //   timestamp: Date.now() - 86250000,
     // },
-    // 2: {
-    //   uuid: 2,
+    // def: {
+    //   uuid: 'def',
     //   x: 100,
     //   y: 100,
     //   z: 1,
@@ -28,7 +28,20 @@ export const noteSlice = createSlice({
     //   width: 200,
     //   prevWidth: 200,
     //   minimized: false,
-    //   content: '2nd Test Note',
+    //   content: 'Dr. stepforth"s phonenumber is 310-757-2387',
+    //   timestamp: Date.now() + 1000,
+    // },
+    // ghi: {
+    //   uuid: 'ghi',
+    //   x: 1000,
+    //   y: 400,
+    //   z: 1,
+    //   height: 250,
+    //   prevHeight: 250,
+    //   width: 200,
+    //   prevWidth: 200,
+    //   minimized: false,
+    //   content: 'Need to find out from doctor stepfroth if I got my test results back',
     //   timestamp: Date.now() + 1000,
     // },
   },
@@ -71,6 +84,9 @@ export const noteSlice = createSlice({
     setZ: (state, action) => {
       state[action.payload.uuid].z = action.payload.z;
     },
+    replaceState: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
@@ -84,6 +100,7 @@ export const {
   setPosition,
   setMinimized,
   setZ,
+  replaceState
 } = noteSlice.actions;
 
 export default noteSlice.reducer;
