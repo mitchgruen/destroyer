@@ -4,7 +4,9 @@ import Settings from './components/settings';
 import Trash from './components/trash';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addNote } from './redux/slices/noteSlice';
+import { addNote, replaceState } from './redux/slices/noteSlice';
+import axios from 'axios';
+import store from './redux/store';
 // import { ReactComponent as DestroyerLogo } from './assets/logo/destroyertext.svg';
 // import { ReactComponent as AddIcon } from './assets/icons/plus-sharp-regular.svg';
 // import { ReactComponent as SettingsIcon } from './assets/icons/gear-sharp-solid.svg';
@@ -35,8 +37,35 @@ function App() {
     dispatch(addNote({ z: zIndexCounter }));
   }
 
+  const hardCodeState = {
+    jkl: {
+      uuid: 'jkl',
+      x: 250,
+      y: 250,
+      z: 1,
+      height: 100,
+      prevHeight: 250,
+      width: 100,
+      prevWidth: 200,
+      minimized: false,
+      content: 'Test Test Test 1 2 3',
+      timestamp: Date.now() - 86250000,
+    },
+  };
+
   function handleSort() {
-    console.log('Sort clicked!')
+    console.log('Sort clicked!');
+    const reduxState = store.getState();
+    console.log('Here is the Redux State: ' + reduxState);
+    axios
+      .post('http://localhost:8000/sort', reduxState)
+      .then((res) => {
+        console.log('Here is res: ');
+        console.log(typeof JSON.parse(res.data.notes));
+        console.log(res.data.notes);
+        dispatch(replaceState(JSON.parse(res.data.notes)));
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
