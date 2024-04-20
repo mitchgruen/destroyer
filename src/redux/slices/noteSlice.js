@@ -54,7 +54,7 @@ export const noteSlice = createSlice({
       width: 400,
       prevWidth: 200,
       minimized: false,
-      content: `Welcome to Destroyer!\n\nDestroyer is an "ephemeral notepad", meaning that the notes that you add here are not meant to be kept for very long. Destroyer notes have a 24-hour lifespan, after which they are destroyed forever. This note's timer is almost up, so make sure you read the whole thing before it's destroyed!\n\nTo create a new note, click the + icon on the toolbar at the top left of your screen. Notes can be dragged and resized.\n\nNote destruction isn't the only way Destroyer helps you stay clutter free. When you click the magic wand, Destroyer uses AI to sort and consolidate your notes. This feature won't do much if you only have a few notes, but try it after a chaotic brainstorming session and you'll be amazed!`,
+      content: `Welcome to Destroyer!\n\nDestroyer is an "ephemeral notepad", meaning that the notes you add here aren't meant to be kept for very long. Destroyer notes have a 24-hour lifespan, after which they are destroyed forever. This note's timer is almost up, so make sure you read it all before it's destroyed!\n\nTo create a new note, click the + icon on the toolbar at the top right of your screen. Notes can be dragged and resized.\n\nNote destruction isn't the only way Destroyer helps you stay clutter free. When you click the magic wand, Destroyer uses AI to sort and consolidate your notes. This feature won't do much if you only have a few notes, but try it after a chaotic brainstorming session and you'll be amazed!`,
       timestamp: Date.now() - 86250000,
     },
     def: {
@@ -67,7 +67,7 @@ export const noteSlice = createSlice({
       width: 400,
       prevWidth: 200,
       minimized: false,
-      content: `About the Developer:\n\nI'm Mitch Gruen, a software engineer based in Brooklyn, New York. Most days I am working on Destroyer or my other project, Kafkometry, an open-source visualizer for Kafka clusters.\n\nIf you'd like to get in touch, shoot me a connection request on LinkedIn (I'm the only Mitch Gruen on there!) or email me at mitchgruen.dev@gmail.com.`,
+      content: `About the Developer:\n\nI'm Mitch Gruen, a software engineer based in Brooklyn, New York. I spend most of my time working on Destroyer and another project called Kafkometry, which is an open-source visualizer for Kafka clusters.\n\nIf you'd like to get in touch, shoot me a connection request on LinkedIn (I'm the only Mitch Gruen on there!) or email me at mitchgruen.dev@gmail.com.`,
       timestamp: Date.now() - 86200000,
     },
   },
