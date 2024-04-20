@@ -37,22 +37,6 @@ function App() {
     dispatch(addNote({ z: zIndexCounter }));
   }
 
-  const hardCodeState = {
-    jkl: {
-      uuid: 'jkl',
-      x: 250,
-      y: 250,
-      z: 1,
-      height: 100,
-      prevHeight: 250,
-      width: 100,
-      prevWidth: 200,
-      minimized: false,
-      content: 'Test Test Test 1 2 3',
-      timestamp: Date.now() - 86250000,
-    },
-  };
-
   function handleSort() {
     console.log('Sort clicked!');
     const reduxState = store.getState();
