@@ -44,10 +44,15 @@ function App() {
       >
         <div className="navbar">
           <div>
-            <DestroyerLogo className="logo" />
+            {/* <DestroyerLogo className="logo" /> */}
+            <div className="main-logo">Destroyer</div>
           </div>
           <button onClick={handleClick} className="navbar-icon">
             <i className={`fa-solid fa-plus hover-hand`}></i>
+            {/* <AddIcon className="navbar-icon" /> */}
+          </button>
+          <button onClick={handleClick} className="navbar-icon">
+            <i class="fa-regular fa-wand-magic-sparkles hover-hand"></i>
             {/* <AddIcon className="navbar-icon" /> */}
           </button>
           <button onClick={() => setSettingsOpen(true)} className="navbar-icon">
