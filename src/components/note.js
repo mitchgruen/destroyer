@@ -30,8 +30,6 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
     bringToFront();
   }
 
-  console.log('Rendered: ' + uuid);
-
   // I might refactor lines 36-43, might be better managed with time remaining in state and a use effect?
   // replace useState definition of timeRemaining with variable definition
   // testing removing the useEffect

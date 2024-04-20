@@ -5,7 +5,7 @@ import Trash from './components/trash';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote } from './redux/slices/noteSlice';
-import { ReactComponent as DestroyerLogo } from './assets/logo/destroyertext.svg';
+// import { ReactComponent as DestroyerLogo } from './assets/logo/destroyertext.svg';
 // import { ReactComponent as AddIcon } from './assets/icons/plus-sharp-regular.svg';
 // import { ReactComponent as SettingsIcon } from './assets/icons/gear-sharp-solid.svg';
 // import { ReactComponent as TrashIcon } from './assets/icons/trash-sharp-solid.svg';
@@ -35,6 +35,10 @@ function App() {
     dispatch(addNote({ z: zIndexCounter }));
   }
 
+  function handleSort() {
+    console.log('Sort clicked!')
+  }
+
   return (
     <div className="app">
       <div
@@ -51,7 +55,7 @@ function App() {
             <i className={`fa-solid fa-plus hover-hand`}></i>
             {/* <AddIcon className="navbar-icon" /> */}
           </button>
-          <button onClick={handleClick} className="navbar-icon">
+          <button onClick={handleSort} className="navbar-icon">
             <i class="fa-regular fa-wand-magic-sparkles hover-hand"></i>
             {/* <AddIcon className="navbar-icon" /> */}
           </button>
