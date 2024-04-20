@@ -35,6 +35,10 @@ function App() {
     dispatch(addNote({ z: zIndexCounter }));
   }
 
+  function handleSort() {
+    console.log('Sort clicked!')
+  }
+
   return (
     <div className="app">
       <div
@@ -51,7 +55,7 @@ function App() {
             <i className={`fa-solid fa-plus hover-hand`}></i>
             {/* <AddIcon className="navbar-icon" /> */}
           </button>
-          <button onClick={handleClick} className="navbar-icon">
+          <button onClick={handleSort} className="navbar-icon">
             <i class="fa-regular fa-wand-magic-sparkles hover-hand"></i>
             {/* <AddIcon className="navbar-icon" /> */}
           </button>
