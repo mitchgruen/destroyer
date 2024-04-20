@@ -30,7 +30,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
     bringToFront();
   }
 
-  console.log('Rendered: ' + uuid)
+  console.log('Rendered: ' + uuid);
 
   // I might refactor lines 36-43, might be better managed with time remaining in state and a use effect?
   // replace useState definition of timeRemaining with variable definition
@@ -123,7 +123,8 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   function get24HourCountdown(createdAt) {
     const creationTime = new Date(createdAt);
     const now = new Date();
-    let timeLeft = creationTime.getTime() + 24 * 60 * 60 * 1000 - now.getTime() - 1000; // Time left in milliseconds
+    let timeLeft =
+      creationTime.getTime() + 24 * 60 * 60 * 1000 - now.getTime() - 1000; // Time left in milliseconds
 
     if (timeLeft < 0) {
       return { hours: '00', minutes: '00' };
@@ -148,7 +149,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   return (
     // <div style={{ overflow: 'hidden' }}>
     <Rnd
-      style={{ zIndex: note.z }}
+      style={{ zIndex: note.z, opacity: 1 }}
       minWidth={150}
       minHeight={minHeightGlobal}
       lockAspectRatio={false}
@@ -218,6 +219,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
       }}
     >
       <div className="note">
+        <div className="i"></div>
         <div className="header-left-1">
           <button onClick={handleClose}>
             <i className={`fa-solid fa-x hover-hand`}></i>
@@ -247,6 +249,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
             {countdown.minutes ? countdown.minutes : '00'}
           </span>
         </div>
+        <div className="j"></div>
         <div
           className="note-textarea-wrapper"
           onMouseDown={bringToFront}
