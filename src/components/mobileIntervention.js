@@ -1,4 +1,4 @@
-import '../styles/MobileInterventionStyle.css';
+import '../styles/MobileStyle.css';
 
 function MobileIntervention() {
   return (
