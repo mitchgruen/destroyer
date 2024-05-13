@@ -1,5 +1,5 @@
 import '../styles/AuthStyle.css';
-import { ReactComponent as DestroyerLogo } from '../assets/logo/destroyertext.svg';
+import { ReactComponent as DestroyerLogo } from '../assets/logo/destroyer-wordmark-black.svg';
 
 export default function AuthWrapper({ children }) {
   return (

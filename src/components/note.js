@@ -10,7 +10,7 @@ import {
   setMinimized,
   setZ,
 } from '../redux/slices/noteSlice';
-import Fade from './fade';
+// import Fade from './fade';
 
 function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
   const note = useSelector((state) => state.notes[uuid]);

@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addNote, replaceState } from './redux/slices/noteSlice';
 import axios from 'axios';
 import store from './redux/store';
-// import { ReactComponent as DestroyerLogo } from './assets/logo/destroyertext.svg';
+import { ReactComponent as DestroyerLogo } from './assets/logo/destroyer-wordmark-black.svg';
 // import { ReactComponent as AddIcon } from './assets/icons/plus-sharp-regular.svg';
 // import { ReactComponent as SettingsIcon } from './assets/icons/gear-sharp-solid.svg';
 // import { ReactComponent as TrashIcon } from './assets/icons/trash-sharp-solid.svg';
@@ -56,15 +56,15 @@ function App() {
       >
         <div className="navbar">
           <div>
-            {/* <DestroyerLogo className="logo" /> */}
-            <div className="main-logo">Destroyer</div>
+            <DestroyerLogo className="logo" />
+            {/* <div className="main-logo">Destroyer</div> */}
           </div>
           <button onClick={handleClick} className="navbar-icon">
             <i className={`fa-solid fa-plus hover-hand`}></i>
             {/* <AddIcon className="navbar-icon" /> */}
           </button>
           <button onClick={handleSort} className="navbar-icon">
-            <i class="fa-regular fa-wand-magic-sparkles hover-hand"></i>
+            <i className="fa-regular fa-wand-magic-sparkles hover-hand"></i>
             {/* <AddIcon className="navbar-icon" /> */}
           </button>
           <button onClick={() => setSettingsOpen(true)} className="navbar-icon">
