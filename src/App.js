@@ -13,7 +13,7 @@ import { ReactComponent as DestroyerLogo } from './assets/logo/destroyer-wordmar
 // import { ReactComponent as TrashIcon } from './assets/icons/trash-sharp-solid.svg';
 
 function App() {
-  const [zIndexCounter, setZIndexCounter] = useState(0);
+  const [zIndexCounter, setZIndexCounter] = useState(1);
   const [minuteTick, setMinuteTick] = useState(0);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const [isTrashOpen, setTrashOpen] = useState(false);
