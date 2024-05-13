@@ -12,9 +12,6 @@ export default function ForgotPassword() {
     axios
       .post('http://localhost:8000/auth/forgot', formData)
       .then((res) => {
-        // navigate('/app');
-        // console.log(res.status);
-        console.log('Inside Handle Submit for Forgot');
         alert(res.data.message);
       })
       .catch((err) => console.log(err));

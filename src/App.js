@@ -38,15 +38,10 @@ function App() {
   }
 
   function handleSort() {
-    console.log('Sort clicked!');
     const reduxState = store.getState();
-    console.log('Here is the Redux State: ' + reduxState);
     axios
       .post('https://www.api.destroyerapp.com/sort', reduxState)
       .then((res) => {
-        console.log('Here is res: ');
-        console.log(typeof JSON.parse(res.data.notes));
-        console.log(res.data.notes);
         dispatch(replaceState(JSON.parse(res.data.notes)));
       })
       .catch((err) => console.log(err));

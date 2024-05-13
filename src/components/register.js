@@ -32,16 +32,12 @@ export default function Register() {
 
 
   // useState to ensure that button style changes when submitting with enter
-
-  console.log(process.env.REACT_APP_API_URL);
-
   const handleSubmit = (e) => {
     clearErrors();
     e.preventDefault();
     // This grabs the data from the form and converts it to a JavaScript object
     const formData = Object.fromEntries(new FormData(e.currentTarget));
     // Catch as many registration errors here as you can to avoid unnecessary API calls
-    console.log(formData);
     const { email, password, confirm, name } = formData;
 
     // FRONT END FORM VALIDATION
@@ -88,14 +84,12 @@ export default function Register() {
         setTimeout(() => {
           navigate('/thanks');
         }, 1000);
-        console.log(res.status);
       })
       .catch((err) => {
         setEmailError(simpleError(err).registration.email);
         setPasswordError(simpleError(err).registration.password);
         setConfirmPasswordError(simpleError(err).registration.confirm);
         setNameError(simpleError(err).registration.name);
-        console.log(simpleError(err));
       });
   };
 
