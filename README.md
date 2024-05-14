@@ -1,1 +1,1 @@
-Destroyer.
+Destroyer helps you stay organized by automatically sorting your notes and deleting clutter. Destroyer is under active development, but you can click this link to check it out in demo mode: https://www.destroyerapp.com/app
