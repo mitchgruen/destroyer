@@ -87,6 +87,7 @@ function App() {
               minuteTick={minuteTick}
             />
           ))}
+          <a className='privacy' href='../public/privacy.pdf'>Privacy</a>
         </div>
       </div>
       <Settings
