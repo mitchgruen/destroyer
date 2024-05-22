@@ -87,7 +87,7 @@ function App() {
               minuteTick={minuteTick}
             />
           ))}
-          <a className='privacy' href='../public/privacy.pdf'>Privacy</a>
+          <a className='privacy' href='https://destroyerapp.netlify.app/privacy.pdf'>Privacy</a>
         </div>
       </div>
       <Settings
