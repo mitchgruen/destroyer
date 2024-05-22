@@ -11,7 +11,7 @@
 }
 
 .main-logo {
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-optical-sizing: auto;
   font-size: 33px;
   font-weight: 500;
@@ -84,4 +84,13 @@
 .navbar-icon {
   font-size: x-large;
   padding: 6px;
+}
+
+.privacy {
+  position: absolute;
+  bottom: 0;
+  right: 1;
+  margin-right: 10px;
+  color: #888888;
+  text-decoration: none;
 }
