@@ -67,7 +67,7 @@ export const noteSlice = createSlice({
       width: 400,
       prevWidth: 200,
       minimized: false,
-      content: `About the Developer:\n\nI'm Mitch Gruen, a software engineer in Brooklyn, New York. I spend most of my time working on Destroyer and another project called Kafkometry, which is an open-source visualizer for Kafka clusters.\n\nIf you'd like to get in touch, shoot me a connection request on LinkedIn (I'm the only Mitch Gruen on there!) or email me at mitchgruen.dev@gmail.com.`,
+      content: `About the Developer:\n\nI'm Mitch Gruen, a software engineer in Brooklyn, New York.\n\nIf you'd like to get in touch, shoot me a connection request on LinkedIn (I'm the only Mitch Gruen on there!) or email me at mitchgruen.dev@gmail.com.`,
       timestamp: Date.now() - 86200000,
     },
   },
