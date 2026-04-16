@@ -8,9 +8,7 @@ import { addNote, replaceState } from './redux/slices/noteSlice';
 import axios from 'axios';
 import store from './redux/store';
 import { ReactComponent as DestroyerLogo } from './assets/logo/destroyer-wordmark-black.svg';
-// import { ReactComponent as AddIcon } from './assets/icons/plus-sharp-regular.svg';
-// import { ReactComponent as SettingsIcon } from './assets/icons/gear-sharp-solid.svg';
-// import { ReactComponent as TrashIcon } from './assets/icons/trash-sharp-solid.svg';
+import { Plus, WandMagicSparkles, Gear, Trash as TrashIcon } from './icons';
 
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(1);
@@ -60,12 +58,10 @@ function App() {
             {/* <div className="main-logo">Destroyer</div> */}
           </div>
           <button onClick={handleClick} className="navbar-icon">
-            <i className={`fa-solid fa-plus hover-hand`}></i>
-            {/* <AddIcon className="navbar-icon" /> */}
+            <Plus />
           </button>
           <button onClick={handleSort} className="navbar-icon">
-            <i className="fa-regular fa-wand-magic-sparkles hover-hand"></i>
-            {/* <AddIcon className="navbar-icon" /> */}
+            <WandMagicSparkles />
           </button>
           <button onClick={() => setSettingsOpen(true)} className="navbar-icon">
             <i className={`fa-solid fa-gear hover-hand`}></i>
