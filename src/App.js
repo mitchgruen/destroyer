@@ -80,7 +80,7 @@ function App() {
           </button> */}
         </div>
         <div></div>
-        <div className="notes-container">
+        <div className={`notes-container ${isSorting ? "dim" : ""}`}>
           {Object.keys(noteState).map((uuid, index) => (
             <Note
               key={uuid}

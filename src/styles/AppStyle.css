@@ -42,6 +42,12 @@
   justify-content: center;
 }
 
+.notes-container.dim {
+  opacity: 0.4;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
 .blur-background {
   filter: blur(2px);
 }
