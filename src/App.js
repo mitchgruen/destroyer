@@ -8,13 +8,14 @@ import { addNote, replaceState } from "./redux/slices/noteSlice";
 import axios from "axios";
 import store from "./redux/store";
 import { ReactComponent as DestroyerLogo } from "./assets/logo/destroyer-wordmark-black.svg";
-import { Plus, WandMagicSparkles } from "./icons";
+import { Plus, WandMagicSparkles, Spinner } from "./icons";
 
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(1);
   const [minuteTick, setMinuteTick] = useState(0);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const [isTrashOpen, setTrashOpen] = useState(false);
+  const [isSorting, setIsSorting] = useState(false);
 
   // const notes = useSelector(state => state.notes)
 
@@ -36,6 +37,7 @@ function App() {
   }
 
   function handleSort() {
+    setIsSorting(true);
     const reduxState = store.getState();
     axios
       .post("/.netlify/functions/sort", reduxState)
@@ -48,7 +50,8 @@ function App() {
           err.response?.status,
           err.response?.data ?? err.message,
         );
-      });
+      })
+      .finally(() => setIsSorting(false));
   }
 
   return (
@@ -66,8 +69,8 @@ function App() {
           <button onClick={handleClick} className="navbar-icon">
             <Plus />
           </button>
-          <button onClick={handleSort} className="navbar-icon">
-            <WandMagicSparkles />
+          <button onClick={handleSort} className="navbar-icon" disabled={isSorting}>
+            {isSorting ? <Spinner /> : <WandMagicSparkles />}
           </button>
           {/* <button onClick={() => setSettingsOpen(true)} className="navbar-icon">
             <Gear />

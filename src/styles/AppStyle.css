@@ -3,6 +3,14 @@
   height: 100%;
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1.2s linear infinite;
+}
+
 .logo {
   height: 35px;
   width: auto;
