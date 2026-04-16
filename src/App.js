@@ -1,14 +1,14 @@
-import './styles/AppStyle.css';
-import Note from './components/note';
-import Settings from './components/settings';
-import Trash from './components/trash';
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addNote, replaceState } from './redux/slices/noteSlice';
-import axios from 'axios';
-import store from './redux/store';
-import { ReactComponent as DestroyerLogo } from './assets/logo/destroyer-wordmark-black.svg';
-import { Plus, WandMagicSparkles } from './icons';
+import "./styles/AppStyle.css";
+import Note from "./components/note";
+import Settings from "./components/settings";
+import Trash from "./components/trash";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addNote, replaceState } from "./redux/slices/noteSlice";
+import axios from "axios";
+import store from "./redux/store";
+import { ReactComponent as DestroyerLogo } from "./assets/logo/destroyer-wordmark-black.svg";
+import { Plus, WandMagicSparkles } from "./icons";
 
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(1);
@@ -38,18 +38,24 @@ function App() {
   function handleSort() {
     const reduxState = store.getState();
     axios
-      .post('https://www.api.destroyerapp.com/sort', reduxState)
+      .post("/.netlify/functions/sort", reduxState)
       .then((res) => {
         dispatch(replaceState(JSON.parse(res.data.notes)));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(
+          "[sort] error:",
+          err.response?.status,
+          err.response?.data ?? err.message,
+        );
+      });
   }
 
   return (
     <div className="app">
       <div
         className={`app-grid ${
-          isSettingsOpen || isTrashOpen ? 'blur-background' : ''
+          isSettingsOpen || isTrashOpen ? "blur-background" : ""
         }`}
       >
         <div className="navbar">
@@ -81,7 +87,12 @@ function App() {
               minuteTick={minuteTick}
             />
           ))}
-          <a className='privacy' href='https://destroyerapp.netlify.app/privacy.pdf'>Privacy</a>
+          <a
+            className="privacy"
+            href="https://destroyerapp.netlify.app/privacy.pdf"
+          >
+            Privacy
+          </a>
         </div>
       </div>
       <Settings
