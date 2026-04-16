@@ -1,4 +1,5 @@
 import '../styles/NoteStyle.css';
+import { X, Minus } from '../icons';
 import { Rnd } from 'react-rnd';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -220,7 +221,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
           <div className="i"></div>
           <div className="header-left-1">
             <button onClick={handleClose}>
-              <i className={`fa-solid fa-x hover-hand`}></i>
+              <X size={16} />
             </button>
           </div>
           <div className="header-left-2">
@@ -229,7 +230,7 @@ function Note({ uuid, zIndexCounter, setZIndexCounter, minuteTick }) {
               onMouseDown={handleHeaderClick}
               onMouseUp={backgroundClickTrue}
             >
-              <i className={`fa-solid fa-minus hover-hand`}></i>
+              <Minus size={16} />
             </button>
           </div>
           <div
