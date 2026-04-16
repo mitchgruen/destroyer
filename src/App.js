@@ -63,14 +63,12 @@ function App() {
           <button onClick={handleSort} className="navbar-icon">
             <WandMagicSparkles />
           </button>
-          <button onClick={() => setSettingsOpen(true)} className="navbar-icon">
-            <i className={`fa-solid fa-gear hover-hand`}></i>
-            {/* <SettingsIcon className="navbar-icon" /> */}
-          </button>
-          <button onClick={() => setTrashOpen(true)} className="navbar-icon">
-            <i className={`fa-solid fa-trash hover-hand`}></i>
-            {/* <TrashIcon className="navbar-icon" /> */}
-          </button>
+          {/* <button onClick={() => setSettingsOpen(true)} className="navbar-icon">
+            <Gear />
+          </button> */}
+          {/* <button onClick={() => setTrashOpen(true)} className="navbar-icon">
+            <TrashIcon />
+          </button> */}
         </div>
         <div></div>
         <div className="notes-container">
