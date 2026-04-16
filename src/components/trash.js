@@ -1,4 +1,5 @@
 import '../styles/TrashStyle.css';
+import { X } from '../icons';
 
 function Trash({ onClose, isTrashOpen }) {
   if (!isTrashOpen) return null;
@@ -8,7 +9,7 @@ function Trash({ onClose, isTrashOpen }) {
       <div className="trash-menu">
         <div className="close">
           <button onClick={onClose}>
-            <i className={`fa-solid fa-x hover-hand`}></i>
+            <X size={16} />
           </button>
         </div>
         <div className="header" />

@@ -1,4 +1,5 @@
 import '../styles/SettingsStyle.css';
+import { X } from '../icons';
 
 function Settings({ onClose, isSettingsOpen }) {
   if (!isSettingsOpen) return null;
@@ -8,7 +9,7 @@ function Settings({ onClose, isSettingsOpen }) {
       <div className="settings-menu">
         <div className="close">
           <button onClick={onClose}>
-            <i className={`fa-solid fa-x hover-hand`}></i>
+            <X size={16} />
           </button>
         </div>
         <div className="header" />
