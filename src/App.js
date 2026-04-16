@@ -8,7 +8,7 @@ import { addNote, replaceState } from './redux/slices/noteSlice';
 import axios from 'axios';
 import store from './redux/store';
 import { ReactComponent as DestroyerLogo } from './assets/logo/destroyer-wordmark-black.svg';
-import { Plus, WandMagicSparkles, Gear, Trash as TrashIcon } from './icons';
+import { Plus, WandMagicSparkles } from './icons';
 
 function App() {
   const [zIndexCounter, setZIndexCounter] = useState(1);
